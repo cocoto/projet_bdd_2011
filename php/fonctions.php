@@ -1,5 +1,6 @@
 <?php
 /*	FICHIER DE FONCTIONS PHP MYSQL DU SITE : A ne pas diffuser	*/
+/*Pas de mysql_free_result car obsolète (source:doc php), mais executable manuèlement */
 $bdd="";//identifiant de la base de donnée. Variable globale invisible dans les scripts
 $host='127.0.0.1';
 $login='root';
