@@ -156,6 +156,10 @@
 			}
 			echo "=============================FIN GENERATION DES PRIX===========================<br/>";
 		}
+		else
+		{
+			echo "Problème lors de la connection à la base de donnée. Veuillez contactez un administrateur";
+		}
 	?>
 	</div>
 	<?php
