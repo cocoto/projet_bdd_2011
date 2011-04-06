@@ -17,11 +17,25 @@
 	?>
 	<div id="corps">
 	<h1>Liste des produits :</h1>
-	<?php
-		if (isset($_SESSION['id_mag']))
+	<?php	
+		if (connection_base())
 		{
-			if (connection_base())
+			if (isset($_SESSION['id_mag']))
 			{
+				if(isset($_POST['id_p']))
+				{
+					$prix=htmlspecialchars($_POST['prix']);
+					$dispo=isset($_POST['dispo'])?1:0;
+					$requete='REPLACE INTO Tarif(id_p,id_mag,prix,dispo) VALUES ("'.$_POST['id_p'].'","'.$_SESSION['id_mag'].'","'.$prix.'","'.$dispo.'")';
+					if(execute_requete($requete))
+					{
+						echo "Modifications effectuées";
+					}
+					else
+					{
+						echo "Problème lors des modifications";
+					}
+				}
 				echo"<table>";
 				$requete="SELECT Produit.id_p, type, nom_p,dispo,prix FROM Produit LEFT OUTER JOIN (SELECT id_p,prix,dispo FROM Tarif WHERE id_mag=".$_SESSION['id_mag'].") test ON Produit.id_p = test.id_p ORDER BY dispo DESC,type,nom_p";
 				$tab_resultat=execute_requete($requete);
@@ -32,15 +46,14 @@
 						$prix=0;
 					}
 					$dispo = $ligne['dispo']? "checked":"";
-					echo '<form action="" method=POST><input type="hidden" id="id_p"/><tr><td>'.$ligne['nom_p'].'</td><td>'.$ligne['type'].'</td><td><input type="text" id="prix" value="'.$ligne['prix'].'"/></td><td><input type="checkbox" id="prix" '.$dispo.'/></td><td><input type="submit" value="valider"/></tr>';
-					//@TODO Trouver le moyen de faire une centaine de formulaire et n'evoyer que les modifications...
+					echo '<tr><form action="" method=POST><input type="hidden" name="id_p" value="'.$ligne['id_p'].'"/><td><label for="'.$ligne['id_p'].'">'.$ligne['nom_p'].'</label></td><td>'.$ligne['type'].'</td><td><input type="text" name="prix" value="'.$ligne['prix'].'" id="'.$ligne['id_p'].'"/></td><td><input type="checkbox" name="dispo" '.$dispo.'/></td><td><input type="submit" value="valider"/></tr></form>';
 				}
 				echo '</table>';
 			}
-			else
-			{
-				echo "Problème lors de la connection à la base de donnée. Veuillez contactez un administrateur";
-			}	
+		}
+		else
+		{
+			echo "Problème lors de la connection à la base de donnée. Veuillez contactez un administrateur";
 		}
 		
 	?>
