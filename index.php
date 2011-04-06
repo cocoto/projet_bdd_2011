@@ -22,6 +22,33 @@
 		<hr/>
 		<br/>
 		<?php include("php/formulaireRecherche.php"); ?>
+		<br/>
+		<hr/>
+		<table id='list'>
+			<tr>
+				<?php 
+					connection_base();
+					$req='Select rayon,type From Type';	
+					$res=execute_requete($req);
+					foreach($res as $tab){
+						echo "<td>".$tab["rayon"]."</td>";
+					}
+					
+				?>
+			</tr>
+			<tr>
+				<td>
+					<ul>
+						<?php 
+							foreach($res as $tab){
+								echo "<li>".$tab["type"];
+							}
+							deconnection_base();
+						?>
+					</ul>
+				</td>
+			</tr>
+		</table>
 	</div>
 	
 	<? include("php/foot.php"); ?>

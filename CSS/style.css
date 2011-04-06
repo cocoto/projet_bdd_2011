@@ -7,6 +7,7 @@ body {
 
 #corps{
 	text-align:center;
+	margin-top:10px;
 	margin-left:auto;
 	margin-right:auto;
 	width:1000px;
@@ -49,9 +50,16 @@ body {
 }
 
 #description{
+	text-align:justify;
 	font-style:italic;
 }
 
 #titreP{
-	font-style:bold;
+	font-weight:bold;
+}
+
+#list{
+	width:900px;
+	margin-left:auto;
+	margin-right:auto;
 }
