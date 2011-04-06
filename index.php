@@ -8,6 +8,7 @@
 </head>
 
 <body>
+	<?php include ("php/login.php");?>
 	<?php include("php/head.php"); ?>
 	<?php include("php/menu.php"); ?>
 	<?php include("php/fonctions.php"); ?>
