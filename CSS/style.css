@@ -41,9 +41,17 @@ body {
 #foot{
 	background-image:url('../images/transparent.PNG');
 	text-align:center;
+	font-style:italic;
 	width:1000px;
 	margin-top:10px;
 	margin-left:auto;
 	margin-right:auto;
 }
 
+#description{
+	font-style:italic;
+}
+
+#titreP{
+	font-style:bold;
+}

@@ -26,27 +26,18 @@
 				$res=execute_requete($req);
 				
 				foreach($res as $tab){
-					foreach($tab as $val){
-						echo $val."<br/>";
-					}
+					echo "<p id='titreP'>".$tab["nom_p"]."</p>";
+					echo "<p id='description'>description : ".$tab["description"]."</p>";
 					echo "<hr/><br/>";
 				}
+
 				echo "</p>";
+				
 				deconnection_base();
 			}
 
 		?>
-		<form action='' method='POST'>
-			<table id='tableRecherche'>
-				<tr clospan='2'>
-					<td>Effectuer une nouvelle recherche : </td>
-				</tr>
-				<tr>
-					<td><input type='text' name='recherche' /></td>
-					<td><input type='submit' name='valider' value='Ok'/></td>
-				</tr>
-			</table>
-		</form>
+		<?php include("php/formulaireRecherche.php"); ?>
 
 	</div>
 
