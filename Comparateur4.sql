@@ -1,4 +1,4 @@
-DROP DATABASE `Comparateur`;
+DROP DATABASE IF EXISTS `Comparateur`;
 CREATE DATABASE `Comparateur` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE Comparateur;
 CREATE TABLE IF NOT EXISTS `Enseigne` (

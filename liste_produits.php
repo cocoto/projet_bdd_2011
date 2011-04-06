@@ -12,6 +12,8 @@
 	<?php
 		#include('php/head.php');
 		#include('php/menu.php');
+		session_start();
+		$_SESSION['id_mag']=2;
 	?>
 	<div id="corps">
 	<h1>Liste des produits :</h1>
@@ -20,7 +22,7 @@
 		{
 			if (connection_base())
 			{
-				echo "<form action='',method=POST><table>";
+				echo"<table>";
 				$requete="SELECT Produit.id_p, type, nom_p,dispo,prix FROM Produit LEFT OUTER JOIN (SELECT id_p,prix,dispo FROM Tarif WHERE id_mag=".$_SESSION['id_mag'].") test ON Produit.id_p = test.id_p ORDER BY dispo DESC,type,nom_p";
 				$tab_resultat=execute_requete($requete);
 				foreach ($tab_resultat as $ligne)
@@ -30,9 +32,10 @@
 						$prix=0;
 					}
 					$dispo = $ligne['dispo']? "checked":"";
-					echo '<tr><td>'.$ligne['nom_p'].'</td><td>'.$ligne['type'].'</td><input type=checkbox id=<td>'
+					echo '<form action="" method=POST><input type="hidden" id="id_p"/><tr><td>'.$ligne['nom_p'].'</td><td>'.$ligne['type'].'</td><td><input type="text" id="prix" value="'.$ligne['prix'].'"/></td><td><input type="checkbox" id="prix" '.$dispo.'/></td><td><input type="submit" value="valider"/></tr>';
 					//@TODO Trouver le moyen de faire une centaine de formulaire et n'evoyer que les modifications...
 				}
+				echo '</table>';
 			}
 			else
 			{
