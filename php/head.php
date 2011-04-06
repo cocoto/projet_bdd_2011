@@ -1,5 +1,9 @@
 <?php
-	echo "<div id='head'>
-		<h1> SuperComparator </h1>
-	      </div>";
+
+	include("php/login.php");
+
 ?>
+<div id='head'>
+	<h1> SuperComparator </h1>
+
+</div>

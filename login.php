@@ -9,6 +9,7 @@
 
 <body>
 	<?php include("php/head.php"); ?>
+	<?php include("php/menu.php"); ?>
 	<?php include("php/fonctions.php"); ?>
 	<div id='corps'>
 		<?php	
@@ -18,23 +19,18 @@
 				{
 					$username=htmlspecialchars($_POST['username']);
 					$mdp=sha1(htmlspecialchars($_POST['mdp']));
-					$requete='SELECT id_mag FROM Magasin WHERE nom_m="'.$username.'" AND mdp="'.$mdp.'"';
+					$requete='SELECT id_mag,nom_m FROM Magasin WHERE nom_m="'.$username.'" AND mdp="'.$mdp.'"';
 					$resultat=execute_requete($requete);
-						if(count($resultat)>0)
-						{
-							session_start();
-							$_SESSION['id_mag']=$resultat[0]['id_mag'];
-							echo "Connection Effectuée avec succes !";
-						}
-						else
-						{
-							echo "Vous avez rentré un mauvais couple identifiant/mot de passe";
-						}
-					/*}
+					if(count($resultat)>0)
+					{
+						$_SESSION['id_mag']=$resultat[0]['id_mag'];
+						$_SESSION['nom_m']=$resultat[0]['nom_m'];
+						echo "Connection Effectuée avec succes !";
+					}
 					else
 					{
-						echo "Problème avec votre identifiant ou votre mot de passe. Vérifiez";
-					}*/
+						echo "Vous avez rentré un mauvais couple identifiant/mot de passe";
+					}
 				}
 				else
 				{
@@ -50,7 +46,9 @@
 	Redirection dans 5 secondes;
 	<!-- <script language='JavaScript'>history.back();</script>-->
 	</div>
-	
+	<script language="JavaScript">
+		history.back();
+	</script>
 	<? include("php/foot.php"); ?>
 </body>
 

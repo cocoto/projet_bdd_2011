@@ -1,21 +1,17 @@
-<?php
-	include('php/fonctions.php');
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
 <head>
-	<title>Accueil</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Comparateur de prix</title>
+	<link href="CSS/style.css" rel="stylesheet" type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 </head>
 
 <body>
-	<?php
-		#include('php/head.php');
-		#include('php/menu.php');
-		session_start();
-		$_SESSION['id_mag']=2;
-	?>
-	<div id="corps">
+	<?php include("php/head.php"); ?>
+	<?php include("php/menu.php"); ?>
+	<?php include("php/fonctions.php"); ?>
+	<div id='corps'>
 	<h1>Liste des produits :</h1>
 	<?php	
 		if (connection_base())
@@ -49,6 +45,11 @@
 					echo '<tr><form action="" method=POST><input type="hidden" name="id_p" value="'.$ligne['id_p'].'"/><td><label for="'.$ligne['id_p'].'">'.$ligne['nom_p'].'</label></td><td>'.$ligne['type'].'</td><td><input type="text" name="prix" value="'.$ligne['prix'].'" id="'.$ligne['id_p'].'"/></td><td><input type="checkbox" name="dispo" '.$dispo.'/></td><td><input type="submit" value="valider"/></tr></form>';
 				}
 				echo '</table>';
+			}
+			else
+			{
+				echo "Merci de vous connecter pour atteindre cette partie du site";
+				include("php/login.php");
 			}
 		}
 		else
