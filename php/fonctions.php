@@ -46,6 +46,7 @@ function execute_requete($requete)
 	else
 	{
 		$i=0;
+		$result=array();
 		while ($ligne=mysql_fetch_array($res_requete,MYSQL_BOTH))
 		{
 			$result[$i]=$ligne;
