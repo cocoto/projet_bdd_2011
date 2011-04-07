@@ -39,7 +39,7 @@
 			}
 			else
 			{
-				"Problème de connection à la base de donnée, merci de revenir plus tard ou de contacter un administrateur";
+				echo "Problème de connection à la base de donnée, merci de revenir plus tard ou de contacter un administrateur";
 			}
 			deconnection_base();	
 			?>
