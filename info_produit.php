@@ -22,11 +22,16 @@
 				{
 					echo "<h2>".$resultat[0]['nom_p']."</h2>";
 					echo "<h3>".$resultat[0]['description']."</h3>";
-					$requete='SELECT nom_ens,nom_m,ville,taille,prix,dispo FROM Tarif NATURAL JOIN Magasin JOIN Enseigne on Magasin.id_ens=Enseigne.id_ens WHERE id_p="'.$_GET['id_p'].'"';
-					echo $requete;
+					$requete='SELECT nom_ens,nom_m,ville,taille,prix,dispo FROM Tarif NATURAL JOIN Magasin JOIN Enseigne on Magasin.id_ens=Enseigne.id_ens WHERE id_p="'.$_GET['id_p'].'" ORDER BY dispo DESC, prix ASC';
 					if ($resultat=execute_requete($requete))
 					{
-						//@TODO Afficher un tableau des prix, modifier la requete pour ordonner les résultats
+						echo '<table class="table_prix"><th>Enseigne</th><th>Magasin</th><th>Ville</th><th>prix</th><th>disponibilité</th>';
+						foreach($resultat as $ligne)
+						{
+							$dispo=$ligne['dispo']==1?"oui":"non";
+							echo '<tr><td>'.$ligne['nom_ens'].'</td><td>'.$ligne['nom_m'].'</td><td>'.$ligne['ville'].'</td><td>'.$ligne['prix'].'</td><td>'.$dispo.'</td></tr>';
+						}
+						echo"</table>";
 					}
 					else
 					{
