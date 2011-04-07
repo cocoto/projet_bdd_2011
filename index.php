@@ -27,8 +27,9 @@
 			<tr>
 				<?php 
 					connection_base();
-					$req='Select rayon,type From Type';	
+					$req='Select Distinct rayon From Type';	
 					$res=execute_requete($req);
+					echo $res[1][0];
 					foreach($res as $tab){
 						echo "<td>".$tab["rayon"]."</td>";
 					}
@@ -39,9 +40,12 @@
 				<td>
 					<ul>
 						<?php 
-							foreach($res as $tab){
-								echo "<li>".$tab["type"];
-							}
+							$req2='Select type From Type where rayon='.$res[1];
+							$res2=execute_requete($req2);
+							print_r($res2);
+							/*foreach($res2 as $tab){
+								echo $tab["type"];
+							}*/
 							deconnection_base();
 						?>
 					</ul>

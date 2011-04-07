@@ -5,12 +5,22 @@
 		echo 'Magasin :'.$_SESSION['nom_m'].'<br/><a href="deco.php">Se déconecter</a>';
 	}
 	else
-	{?>
+	{?>	<div  id='login'>
+		<table>
+			
 		<form action="login.php" method=POST>
-			<input type=text name="username"/>
-			<input type=password name="mdp"/>
-			<input type=submit value="accès administration"/>
+			<tr>
+				<td><input type=text name="username" value="username"/></td>
+			</tr>
+			<tr>
+				<td><input type=password name="mdp" value="password"/></td>
+			</tr>
+			<tr>
+				<td><input type=submit value="accès administration"/></td>
+			</tr>
 		</form>
+		</table>
+		</div>
 	<?php }
 ?>
 
