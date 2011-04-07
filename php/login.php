@@ -4,10 +4,13 @@
 	{
 		echo 'Magasin :'.$_SESSION['nom_m'].'<br/><a href="deco.php">Se déconecter</a>';
 	}
+	else if(isset($_SESSION['id_ens']))
+	{
+		echo 'Enseigne :'.$_SESSION['nom_m'].'<br/><a href="deco.php">Se déconecter</a>';
+	}
 	else
 	{?>	<div  id='login'>
-		<table>
-			
+		<table>	
 		<form action="login.php" method=POST>
 			<tr>
 				<td><input type=text name="username" value="username"/></td>
