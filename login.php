@@ -18,7 +18,7 @@
 				if(isset($_POST['username'])&&isset($_POST['mdp']))
 				{
 					$username=htmlspecialchars($_POST['username']);
-					$mdp=sha1(htmlspecialchars($_POST['mdp']));
+					$mdp=sha1($_POST['mdp']);
 					$requete='SELECT id_ens,nom_ens FROM Enseigne WHERE nom_ens="'.$username.'" AND mdp="'.$mdp.'"';
 					$resultat=execute_requete($requete);
 					if(count($resultat)>0)

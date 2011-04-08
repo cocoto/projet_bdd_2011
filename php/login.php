@@ -6,7 +6,7 @@
 	}
 	else if(isset($_SESSION['id_ens']))
 	{
-		echo 'Enseigne :'.$_SESSION['nom_m'].'<br/><a href="deco.php">Se déconecter</a>';
+		echo 'Enseigne :'.$_SESSION['nom_ens'].'<br/><a href="deco.php">Se déconecter</a>';
 	}
 	else
 	{?>	<div  id='login'>

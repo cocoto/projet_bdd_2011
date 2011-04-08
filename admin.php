@@ -23,12 +23,22 @@
 					echo'<h2>Modifier / Ajouter une enseigne</h2>';
 					if(isset($_POST['nom_ens']))
 					{
+						
+						
 						if(!empty($_POST['nom_ens'])&&!empty($_POST['dirg_ens'])&&!empty($_POST['pass_ens']))
 						{
-							$nom=htmlspecialchars($_POST['nom_ens']);
-							$dirg_ens=htmlspecialchars($_POST['dirg_ens']);
-							$mdp=empty($_POST['pass_ens'])?"":sha1(htmlspecialchars($_POST['pass_ens']));
-							$requete='REPLACE INTO Enseigne(id_ens,nom_ens,nom_dirg,mdp) VALUES("'.$_POST['id_ens'].'","'.$nom.'","'.$dirg_ens.'","'.$mdp.'")';
+							if(isset($_POST['supp_ens'])&&$_POST['supp_ens']=="on")
+							{
+								$requete='DELETE Enseigne, Magasin FROM Enseigne, Magasin WHERE Magasin.id_ens="'.$_POST['id_ens'].'" and Enseigne.id_ens="'.$_POST['id_ens'].'"';
+							}
+							else
+							{
+								$nom=htmlspecialchars($_POST['nom_ens']);
+								$dirg_ens=htmlspecialchars($_POST['dirg_ens']);
+								$mdp=empty($_POST['pass_ens'])?"":sha1(htmlspecialchars($_POST['pass_ens']));
+								$requete='REPLACE INTO Enseigne(id_ens,nom_ens,nom_dirg,mdp) VALUES("'.$_POST['id_ens'].'","'.$nom.'","'.$dirg_ens.'","'.$mdp.'")';
+								
+							}
 							if(execute_requete($requete))
 							{
 								echo "Modifications effectuées avec succès !";
@@ -82,6 +92,10 @@
 							<td><input type="password" name="pass_ens" id="pass_ens"/></td>
 						</tr>
 						<tr>
+							<td><label for="supp_ens">Supprimer :</label></td>
+							<td><input type="checkbox" name="supp_ens" id="supp_ens"/></td>
+						</tr>
+						<tr>
 							<td></td>
 							<td><input type="submit" value="'.$valid.'"</td>
 						</tr></table></form>';
@@ -92,14 +106,20 @@
 					{
 						if(!empty($_POST['nom_mag'])&&!empty($_POST['dirg_mag'])&&!empty($_POST['ville_mag'])&&!empty($_POST['pass_mag'])&&!empty($_POST['ens_mag'])&&!empty($_POST['taille_mag']))
 						{
-							$nom=htmlspecialchars($_POST['nom_mag']);
-							$dirg_ens=htmlspecialchars($_POST['dirg_mag']);
-							$ville=htmlspecialchars($_POST['ville_mag']);
-							$ens=$_POST['ens_mag'];
-							$taille=$_POST['taille_mag'];
-							$mdp=sha1(htmlspecialchars($_POST['pass_mag']));
-							$requete='REPLACE INTO Magasin(id_mag,nom_m,nom_resp,taille,ville,id_ens,mdp) VALUES("'.$_POST['id_mag'].'","'.$nom.'","'.$dirg_ens.'","'.$taille.'","'.$ville.'","'.$ens.'","'.$mdp.'")';
-							echo $requete;
+							if(isset($_POST['supp_mag'])&&$_POST['supp_mag']=="on")
+							{
+								$requete='DELETE FROM Magasin WHERE id_mag="'.$_POST['id_mag'].'"';
+							}
+							else
+							{
+								$nom=htmlspecialchars($_POST['nom_mag']);
+								$dirg_ens=htmlspecialchars($_POST['dirg_mag']);
+								$ville=htmlspecialchars($_POST['ville_mag']);
+								$ens=$_POST['ens_mag'];
+								$taille=$_POST['taille_mag'];
+								$mdp=sha1(htmlspecialchars($_POST['pass_mag']));
+								$requete='REPLACE INTO Magasin(id_mag,nom_m,nom_resp,taille,ville,id_ens,mdp) VALUES("'.$_POST['id_mag'].'","'.$nom.'","'.$dirg_ens.'","'.$taille.'","'.$ville.'","'.$ens.'","'.$mdp.'")';	
+							}
 							if(execute_requete($requete))
 							{
 								echo "Modifications effectuées avec succès !";
@@ -189,6 +209,10 @@
 						<tr>
 							<td><label for="pass_mag">Mot de Passe :</label></td>
 							<td><input type="password" name="pass_mag" id="pass_mag"/></td>
+						</tr>
+						<tr>
+							<td><label for="supp_mag">Supprimer :</label></td>
+							<td><input type="checkbox" name="supp_mag" id="supp_mag"/></td>
 						</tr>
 						<tr>
 							<td></td>
