@@ -34,6 +34,10 @@
 					{
 						echo "Problème à j'ajout de l'enseigne".$tab[0].".<br/>";
 					}
+					else
+					{
+						echo "Enseigne ".$tab[0]." ajoutée, mot de passe : \"".$tab[2]."\" <br/>";
+					}
 				}				
 			}
 			else
