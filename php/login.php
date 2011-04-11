@@ -1,15 +1,16 @@
 <?php
 	@session_start();
+	echo "<div  id='login'>";
 	if (isset($_SESSION['id_mag']))
 	{
-		echo 'Magasin :'.$_SESSION['nom_m'].'<br/><a href="deco.php">Se déconecter</a>';
+		echo 'Magasin : '.$_SESSION['nom_m'].'<br/><a href="deco.php">Se déconecter</a>';
 	}
 	else if(isset($_SESSION['id_ens']))
 	{
-		echo 'Enseigne :'.$_SESSION['nom_ens'].'<br/><a href="deco.php">Se déconecter</a>';
+		echo 'Enseigne : '.$_SESSION['nom_ens'].'<br/><input type="button" onclick="self.location.href=\'deco.php\'" value="Se déconecter" />';
 	}
 	else
-	{?>	<div  id='login'>
+	{?>	
 		<table>	
 		<form action="login.php" method=POST>
 			<tr>
@@ -23,7 +24,8 @@
 			</tr>
 		</form>
 		</table>
-		</div>
+		
 	<?php }
+	      echo "</div>";
 ?>
 

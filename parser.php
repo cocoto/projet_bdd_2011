@@ -32,7 +32,7 @@
 					$requete='INSERT IGNORE INTO Enseigne(nom_ens,nom_dirg,mdp) VALUES("'.$tab[0].'","'.$tab[1].'","'.sha1($tab[2]).'")';
 					if(!execute_requete($requete))
 					{
-						echo "Problème à j'ajout de l'enseigne".$tab[0].".<br/>";
+						echo "Problème à l'ajout de l'enseigne".$tab[0].".<br/>";
 					}
 					else
 					{

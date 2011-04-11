@@ -24,35 +24,35 @@
 		<br/>
 		<hr/>
 		<table id='list'>
-			<tr>
-				<?php 
+		
+				<?php
 					connection_base();
-					$req='Select distinct rayon, type From Type group by rayon,type';	
+					$req='Select distinct(rayon),type from Type group by rayon order by rayon,type asc';
 					$res=execute_requete($req);
-					print_r($res);
-						echo $res[1]['rayon']."<br/>";
-					foreach($res as $tab){
-						//echo $tab['rayon']."<br/>";
-						foreach($tab as $val){
-							
+
+					echo "<tr>";
+						for($i=0;$i<count($res);$i++){
+							echo "<td id='tdlist'><a href=\"resultat.php?rayon=".$res[$i][0]."\">".$res[$i][0]."</a><td/>";
 						}
-					}
-					
-					
+					echo "</tr>";
+					echo "<tr id='trlist'>";
+						for($i=0;$i<count($res);$i++){
+							$req2='Select type From Type Where rayon="'.$res[$i][0].'"';
+							$res2=execute_requete($req2);
+							echo "<td id='tdlist'>";
+							echo "<ul>";
+							for($j=0;$j<count($res2);$j++){
+								echo "<li>".$res2[$j][0]."</li>";
+							}
+							echo "</ul>";
+							echo "<td>";			
+							
+						}	
+					echo "</tr>";
 				?>
-			</tr>
-			<tr>
 				<td>
 					<ul>
-						<?php 
-							$req2='Select type From Type where rayon='.$res[1];
-							$res2=execute_requete($req2);
-							print_r($res2);
-							/*foreach($res2 as $tab){
-								echo $tab["type"];
-							}*/
-							deconnection_base();
-						?>
+						
 					</ul>
 				</td>
 			</tr>
