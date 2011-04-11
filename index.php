@@ -42,7 +42,7 @@
 							echo "<td id='tdlist'>";
 							echo "<ul>";
 							for($j=0;$j<count($res2);$j++){
-								echo "<li>".$res2[$j][0]."</li>";
+								echo "<li><a href=\"resultat.php?type=".$res2[$j][0]."\">".$res2[$j][0]."</li>";
 							}
 							echo "</ul>";
 							echo "<td>";			
