@@ -218,6 +218,111 @@
 							<td></td>
 							<td><input type="submit" value="'.$valid.'"</td>
 						</tr></table></form>';
+						echo'<h2>Modifier / Ajouter un rayon</h2>';
+					if(isset($_POST['nom_type']))
+					{
+						if(!empty($_POST['nom_type']) && isset($_POST['nom_rayon']) && !empty($_POST['nom_rayon']))
+						{
+							if(isset($_POST['supp_type']) && $_POST['supp_type']=="on")
+							{
+								$requete='DELETE Tarif,Type FROM Tarif,Produit,Type
+								WHERE Type.type="'.$_POST['nom_type_ans'].'" and Tarif.id_p in
+								(SELECT id_p FROM Produit WHERE type="'.$_POST['nom_type_ans'].'")';
+								if(execute_requete($requete))
+								{
+									$requete='DELETE FROM Produit WHERE type="'.$_POST['nom_type_ans'].'"';
+								}
+								else
+								{
+									echo "problème lors de la suppression, veuillez contacter un administrateur";
+								}
+								//execute_requete($requete);
+							}
+							else
+							{
+								$nom=htmlspecialchars($_POST['nom_type']);
+								$rayon=htmlspecialchars($_POST['nom_rayon']);
+								$requete='UPDATE Type,Produit 
+										SET Type.type="'.$nom.'",Type.rayon="'.$rayon.'",Produit.type="'.$nom.'" 
+											WHERE Type.type="'.$_POST['nom_type_ans'].'" and Produit.type="'.$_POST['nom_type_ans'].'"';
+								if(execute_requete($requete))
+								{
+									$requete='REPLACE INTO Type(type,rayon) VALUES("'.$nom.'","'.$rayon.'")';
+								}
+							}
+							if(execute_requete($requete))
+							{
+								if(execute_requete($requete))
+								{
+									echo "Modifications effectuées avec succès !";
+								}
+								else
+								{
+									echo "Erreur critique #1, merci de contacter un administrateur en detaillant votre démarche";
+								}
+							}
+							else
+							{
+								echo "Problème lors de la modification, merci de renseigner tous les champs";
+							}
+						}
+						else
+						{
+							echo "Vous n'avez pas remplis tous les champs";
+						}
+					}
+					$requete='SELECT type,rayon FROM Type';
+					if($resultat=execute_requete($requete))
+					{
+						echo '<form action="" method=POST><select name="nom_type_ans" onchange="submit()"><OPTION>Choisir Type</OPTION>';
+						foreach($resultat as $type)
+						{
+							echo'<OPTION VALUE="'.$type['type'].'">'.$type['type'].'</OPTION>';
+						}
+						echo '</select></form>';
+					}
+					$nom_ans="";
+					$nom="";
+					$rayon="";
+					$valid="Ajouter";
+					if(isset($_POST['nom_type_ans']))
+					{
+						$requete='SELECT type,rayon FROM Type WHERE type="'.$_POST['nom_type_ans'].'"';
+						if($resultat=execute_requete($requete))
+						{
+							$nom_ans=$resultat[0]['type'];
+							$nom=$resultat[0]['type'];
+							$rayon=$resultat[0]['rayon'];
+							$valid="Modifier";
+						}
+					}
+					echo '<form action="" method=POST><input type="hidden" name="nom_type_ans" value="'.$nom_ans.'"/><table>
+						<tr>
+							<td><label for="nom_mag">Nom :</label></td>
+							<td><input type="text" name="nom_type" id="nom_type" value="'.$nom.'"/></td>
+						</tr>
+						<tr>
+							<td><label for="nom_rayon">Rayon :</label></td>
+							<td><select name="nom_rayon"><OPTION>"Un rayon"</OPTION>';
+								$requete_rayon='SELECT DISTINCT rayon FROM Type';
+								$resultat_rayon=execute_requete($requete_rayon);
+								foreach($resultat_rayon as $l_rayon)
+								{
+									echo'<OPTION VALUE="'.$l_rayon['rayon'].'"';
+									if($l_rayon['rayon']==$rayon){echo'selected="selected"';}
+									echo '>'.$l_rayon['rayon'].'</OPTION>';
+								}
+								echo'</td></select>
+						</tr>
+						<tr>
+							<td><label for="supp_type">Supprimer :</label></td>
+							<td><input type="checkbox" name="supp_type" id="supp_type"/></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" value="'.$valid.'"</td>
+						</tr></table></form>';
+						
 				}
 				else
 				{
