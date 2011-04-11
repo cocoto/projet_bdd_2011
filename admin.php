@@ -20,7 +20,7 @@
 			{
 				if(connection_base())
 				{
-					echo'<h2>Modifier / Ajouter une enseigne</h2>';
+					echo '<a href="admin_produits.php">Administration des produits</a>';
 					if(isset($_POST['nom_ens']))
 					{
 						
@@ -177,10 +177,13 @@
 							echo "Vous n'avez pas remplis tous les champs";
 						}
 					}
+		
+		
+		echo'<h2 id="edit_enseigne">Modifier / Ajouter une enseigne</h2>';
 					$requete='SELECT id_ens,nom_ens FROM Enseigne';
 					if($resultat_ens=execute_requete($requete))
 					{
-						echo '<form action="" method=POST><select name="id_ens" onchange="submit()"><OPTION>Choisir Enseigne</OPTION>';
+						echo '<form action="#edit_enseigne" method=POST><select name="id_ens" onchange="submit()"><OPTION>Choisir Enseigne</OPTION>';
 						foreach($resultat_ens as $enseigne)
 						{
 							echo'<OPTION VALUE="'.$enseigne['id_ens'].'">'.$enseigne['nom_ens'].'</OPTION>';
@@ -225,12 +228,12 @@
 						</tr></table></form>';
 				
 				
-					echo'<h2>Modifier / Ajouter un magasin</h2>';
+		echo'<h2 id="edit_magasin">Modifier / Ajouter un magasin</h2>';
 					
 					$requete='SELECT id_mag,nom_m,nom_ens FROM Magasin JOIN Enseigne on Enseigne.id_ens=Magasin.id_ens';
 					if($resultat=execute_requete($requete))
 					{
-						echo '<form action="" method=POST><select name="id_mag" onchange="submit()"><OPTION>Choisir Magasin</OPTION>';
+						echo '<form action="#edit_magasin" method=POST><select name="id_mag" onchange="submit()"><OPTION>Choisir Magasin</OPTION>';
 						foreach($resultat as $magasin)
 						{
 							echo'<OPTION VALUE="'.$magasin['id_mag'].'">'.$magasin['nom_ens'].' '.$magasin['nom_m'].'</OPTION>';
@@ -311,11 +314,11 @@
 							<td></td>
 							<td><input type="submit" value="'.$valid.'"</td>
 						</tr></table></form>';
-					echo'<h2>Modifier / Ajouter un rayon</h2>';
+		echo'<h2 id="modif_rayon">Modifier / Ajouter un rayon</h2>';
 					$requete='SELECT DISTINCT rayon FROM Type';
 					if($resultat_rayon=execute_requete($requete))
 					{
-						echo '<form action="" method=POST><select name="nom_rayon_ans" onchange="submit()"><OPTION>Choisir Rayon</OPTION>';
+						echo '<form action="#modif_rayon" method=POST><select name="nom_rayon_ans" onchange="submit()"><OPTION>Choisir Rayon</OPTION>';
 						foreach($resultat_rayon as $rayon)
 						{
 							echo'<OPTION VALUE="'.$rayon['rayon'].'">'.$rayon['rayon'].'</OPTION>';
@@ -347,12 +350,12 @@
 					}
 					
 				
-					echo'<h2>Modifier / Ajouter un type de produit</h2>';
+		echo'<h2 id="modif_type">Modifier / Ajouter un type de produit</h2>';
 					
 					$requete='SELECT type,rayon FROM Type';
 					if($resultat=execute_requete($requete))
 					{
-						echo '<form action="" method=POST><select name="nom_type_ans" onchange="submit()"><OPTION>Choisir Type</OPTION>';
+						echo '<form action="#modif_type" method=POST><select name="nom_type_ans" onchange="submit()"><OPTION>Choisir Type</OPTION>';
 						foreach($resultat as $type)
 						{
 							echo'<OPTION VALUE="'.$type['type'].'">'.$type['type'].'</OPTION>';

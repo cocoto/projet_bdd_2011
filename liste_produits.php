@@ -49,7 +49,6 @@
 			else
 			{
 				echo "Merci de vous connecter pour atteindre cette partie du site";
-				include("php/login.php");
 			}
 		}
 		else
