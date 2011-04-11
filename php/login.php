@@ -20,7 +20,7 @@
 				<td><input type=password name="mdp"/></td>
 			</tr>
 			<tr>
-				<td><input type=submit value="accès administration"/></td>
+				<td><input type=submit value="connection"/></td>
 			</tr>
 		</form>
 		</table>
