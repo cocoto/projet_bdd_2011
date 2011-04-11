@@ -27,12 +27,17 @@
 			<tr>
 				<?php 
 					connection_base();
-					$req='Select Distinct rayon From Type';	
+					$req='Select distinct rayon, type From Type group by rayon,type';	
 					$res=execute_requete($req);
-					echo $res[1][0];
+					print_r($res);
+						echo $res[1]['rayon']."<br/>";
 					foreach($res as $tab){
-						echo "<td>".$tab["rayon"]."</td>";
+						//echo $tab['rayon']."<br/>";
+						foreach($tab as $val){
+							
+						}
 					}
+					
 					
 				?>
 			</tr>
