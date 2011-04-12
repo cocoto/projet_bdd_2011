@@ -31,7 +31,7 @@
 					}
 				}
 				$tab_types=execute_requete('SELECT type FROM Type');
-				echo"<br/>Ajouter un produit<br/><table>";
+				echo"<br/>Ajouter un produit<br/><table id='list'>";
 				echo '<tr><form action="" method=POST><input type="hidden" name="id_p" value=""/><td><input type="text" name="ref" value="Reference"/><td><input type="text" name="nom_p" value="nom du produit"/></td><td><select name="type">';
 					foreach($tab_types as $type)
 					{
@@ -39,7 +39,7 @@
 					}
 					echo '</td><td><input type="textarea" name="description" value="Description"/><td><input type="submit" value="valider"/></tr></form>';
 				echo '</table><br/><br/>';
-				echo"<table>";
+				echo"<table id='list'>";
 				$requete="SELECT Produit.id_p,ref, type, nom_p,description FROM Produit ORDER BY type,nom_p";
 				$tab_resultat=execute_requete($requete);
 				foreach ($tab_resultat as $ligne)
@@ -68,7 +68,7 @@
 	?>
 	</div>
 	<?php
-		#include('php/foot.php');
+		include('php/foot.php');
 		deconnection_base() ;
 	?>
 </body>
