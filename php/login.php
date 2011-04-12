@@ -7,7 +7,13 @@
 	}
 	else if(isset($_SESSION['id_ens']))
 	{
-		echo 'Enseigne : '.$_SESSION['nom_ens'].'<br/><input type="button" onclick="self.location.href=\'deco.php\'" value="Se déconnecter" /><input type="button" onclick="self.location.href=\'admin.php\'" value="Administration" />';
+
+		echo 'Enseigne : '.$_SESSION['nom_ens'].'<br/><input type="button" onclick="self.location.href=\'deco.php\'" value="Se déconnecter" /><input type="button" onclick="self.location.href=\'admin_produits.php\'" value="Administration" />';
+	}
+	else if(isset($_SESSION['admin']))
+	{
+		echo 'Administrateur : <br/><input type="button" onclick="self.location.href=\'deco.php\'" value="Se déconnecter" /><input type="button" onclick="self.location.href=\'admin.php\'" value="Administration" />';
+
 	}
 	else
 	{?>	

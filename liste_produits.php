@@ -48,7 +48,7 @@
 			}
 			else
 			{
-				echo "Merci de vous connecter pour atteindre cette partie du site";
+				echo "Vous n'avez pas les droits pour accèder à cette page";
 			}
 		}
 		else
