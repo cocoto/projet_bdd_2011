@@ -9,7 +9,6 @@ a:hover{
 
 #banniere{
 	width:100%;
-	height:100%;
 }
 
 body {
@@ -90,6 +89,19 @@ body {
 	margin-right:auto;
 }
 
+#table_prix{
+	margin-left:auto;
+	margin-right:auto;
+	width:600px;
+	text-align:center;
+}
+
+#ttable_prix{
+	margin-left:auto;
+	margin-left:auto;
+	width:100%;
+}
+
 #tableRecherche{
 	border:outset;
 	margin-top:20px;
@@ -115,12 +127,6 @@ body {
 	border:outset;
 }
 
-#table_prix{
-	margin-left:auto;
-	margin-right:auto;
-	width:600px;
-	text-align:center;
-}
 
 #tdtable_prix{
 	border:outset;

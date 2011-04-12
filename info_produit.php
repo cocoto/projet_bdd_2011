@@ -25,7 +25,7 @@
 					$requete='SELECT nom_ens,nom_m,ville,taille,prix,dispo FROM Tarif NATURAL JOIN Magasin JOIN Enseigne on Magasin.id_ens=Enseigne.id_ens WHERE id_p="'.$_GET['id_p'].'" ORDER BY dispo DESC, prix ASC';
 					if ($resultat=execute_requete($requete))
 					{
-						echo '<div id="table_prix"><table><th id="tdtable_prix">Enseigne</th><th id="tdtable_prix">Magasin</th><th id="tdtable_prix">Ville</th><th id="tdtable_prix">prix</th><th id="tdtable_prix">disponibilité</th>';
+						echo '<div id="table_prix"><table id=\'ttable_prix\'><th id="tdtable_prix">Enseigne</th><th id="tdtable_prix">Magasin</th><th id="tdtable_prix">Ville</th><th id="tdtable_prix">prix</th><th id="tdtable_prix">disponibilité</th>';
 						foreach($resultat as $ligne)
 						{
 							$dispo=$ligne['dispo']==1?"oui":"non";
