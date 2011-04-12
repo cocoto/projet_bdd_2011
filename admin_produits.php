@@ -16,11 +16,27 @@
 	<?php	
 		if (connection_base())
 		{
-			if (isset($_SESSION['id_ens']))
+			if (isset($_SESSION['id_ens']) || isset($_SESSION['admin']))
 			{
 				if(isset($_POST['id_p']))
 				{
-					$requete='REPLACE INTO Produit(id_p,ref,type,nom_p,description) VALUES ("'.$_POST['id_p'].'","'.htmlspecialchars($_POST['ref']).'","'.$_POST['type'].'","'.htmlspecialchars($_POST['nom_p']).'","'.htmlspecialchars($_POST['description']).'")';
+					if(isset($_POST['supp_produit']) and $_POST['supp_produit']=="on")
+					{
+						$requete='DELETE FROM Tarif WHERE id_p="'.$_POST['id_p'].'"';
+						if(execute_requete($requete))
+						{
+							$requete='DELETE FROM Produit WHERE id_p="'.$_POST['id_p'].'"';
+						}
+						else
+						{
+							echo "Erreur sur la supression des tarifs liés à votre produit";
+						}
+					}
+					else
+					{
+						$requete='REPLACE INTO Produit(id_p,ref,type,nom_p,description) VALUES ("'.$_POST['id_p'].'","'.htmlspecialchars($_POST['ref']).'","'.$_POST['type'].'","'.htmlspecialchars($_POST['nom_p']).'","'.htmlspecialchars($_POST['description']).'")';	
+					}
+
 					if(execute_requete($requete))
 					{
 						echo "Modifications effectuées";
@@ -50,7 +66,7 @@
 						$coche=$ligne['type']==$type['type']?"selected":"";
 						echo '<option value="'.$type['type'].'" '.$coche.'>'.$type['type'].'</option>';
 					}
-					echo '</td><td><input type="textarea" name="description" value="'.$ligne['description'].'"/><td><input type="submit" value="valider"/></tr></form>';
+					echo '</td><td><input type="textarea" name="description" value="'.$ligne['description'].'"/><td><input type="checkbox" name="supp_produit"/></td><td><input type="submit" value="valider"/></tr></form>';
 				}
 				echo '</table>';
 			}
@@ -62,7 +78,7 @@
 		}
 		else
 		{
-			echo "Problème lors de la connection à la base de donnée. Veuillez contactez un administrateur";
+			echo "Vous n'avez pas les droits pour accèder à cette page";
 		}
 		
 	?>

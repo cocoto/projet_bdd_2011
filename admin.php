@@ -16,7 +16,7 @@
 		<?php
 			//@TODO Faire la gestion des différents droits
 			//@TODO Implementer Javascript pour vérifier les champs + AJAX dans les listes
-			if(isset($_SESSION['id_mag'])||isset($_SESSION['id_ens']))
+			if(isset($_SESSION['admin']))
 			{
 				if(connection_base())
 				{
@@ -132,7 +132,7 @@
 							if(isset($_POST['supp_type']) && $_POST['supp_type']=="on")
 							{
 								$requete='DELETE Tarif,Type FROM Tarif,Produit,Type
-								WHERE Type.type="'.$_POST['nom_type_ans'].'" and Tarif.id_p in
+								WHERE Type.type="'.$_POST['nom_type_ans'].'" AND Tarif.id_p in
 								(SELECT id_p FROM Produit WHERE type="'.$_POST['nom_type_ans'].'")';
 								if(execute_requete($requete))
 								{

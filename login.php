@@ -17,31 +17,39 @@
 			{
 				if(isset($_POST['username'])&&isset($_POST['mdp']))
 				{
-					$username=htmlspecialchars($_POST['username']);
-					$mdp=sha1($_POST['mdp']);
-					$requete='SELECT id_ens,nom_ens FROM Enseigne WHERE nom_ens="'.$username.'" AND mdp="'.$mdp.'"';
-					$resultat=execute_requete($requete);
-					if(count($resultat)>0)
+					if($_POST['username']=="admin" && $_POST['mdp']=="admin")
 					{
-						$_SESSION['id_ens']=$resultat[0]['id_ens'];
-						$_SESSION['nom_ens']=$resultat[0]['nom_ens'];
-						echo "Connection Effectuée avec succes !";
+						$_SESSION['admin']="Administrateur du site";
 					}
 					else
 					{
-						$requete='SELECT id_mag,nom_m FROM Magasin WHERE nom_m="'.$username.'" AND mdp="'.$mdp.'"';
+						$username=htmlspecialchars($_POST['username']);
+						$mdp=sha1($_POST['mdp']);
+						$requete='SELECT id_ens,nom_ens FROM Enseigne WHERE nom_ens="'.$username.'" AND mdp="'.$mdp.'"';
 						$resultat=execute_requete($requete);
 						if(count($resultat)>0)
 						{
-							$_SESSION['id_mag']=$resultat[0]['id_mag'];
-							$_SESSION['nom_m']=$resultat[0]['nom_m'];
+							$_SESSION['id_ens']=$resultat[0]['id_ens'];
+							$_SESSION['nom_ens']=$resultat[0]['nom_ens'];
 							echo "Connection Effectuée avec succes !";
 						}
 						else
 						{
-							echo "Vous avez rentré un mauvais couple identifiant/mot de passe";
+							$requete='SELECT id_mag,nom_m FROM Magasin WHERE nom_m="'.$username.'" AND mdp="'.$mdp.'"';
+							$resultat=execute_requete($requete);
+							if(count($resultat)>0)
+							{
+								$_SESSION['id_mag']=$resultat[0]['id_mag'];
+								$_SESSION['nom_m']=$resultat[0]['nom_m'];
+								echo "Connection Effectuée avec succes !";
+							}
+							else
+							{
+								echo "Vous avez rentré un mauvais couple identifiant/mot de passe";
+							}
 						}
 					}
+					
 				}
 				else
 				{
