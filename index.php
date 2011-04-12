@@ -23,6 +23,7 @@
 		<?php include("php/formulaireRecherche.php"); ?>
 		<br/>
 		<hr/>
+		
 		<table id='list'>
 		
 				<?php
@@ -40,11 +41,11 @@
 							$req2='Select type From Type Where rayon="'.$res[$i][0].'"';
 							$res2=execute_requete($req2);
 							echo "<td id='tdlist'>";
-							echo "<ul>";
+							
 							for($j=0;$j<count($res2);$j++){
-								echo "<li><a href=\"resultat.php?type=".$res2[$j][0]."\">".$res2[$j][0]."</li>";
+								echo "<a href=\"resultat.php?type=".$res2[$j][0]."\">".$res2[$j][0]."<br/>";
 							}
-							echo "</ul>";
+							
 							echo "<td>";			
 							
 						}	
@@ -57,6 +58,7 @@
 				</td>
 			</tr>
 		</table>
+		
 	</div>
 	
 	<? include("php/foot.php"); ?>
