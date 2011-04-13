@@ -15,6 +15,7 @@
 		
 
 		<h2>Bienvenue sur Notre comparateur de prix.</h2>
+		<?php include('php/nbProduit.php'); ?>
 		<p id='texte'>Si vous êtes directeur d'un magasin, vous pouvez accéder à notre section membre via l'onglet "membre" juste au-dessus.</p>
 		<p id='texte'>Vous pouvez effectuer une recherche par nom de produit ou par description ou bien les deux à la fois.</p>
 		<br/>
@@ -50,6 +51,7 @@
 							
 						}	
 					echo "</tr>";
+					deconnection_base();
 				?>
 				<td>
 					<ul>
