@@ -15,8 +15,8 @@
 		
 
 		<h2>Bienvenue sur Notre comparateur de prix.</h2>
-		<p>Si vous êtes directeur d'un magasin, vous pouvez accéder à notre section membre via l'onglet "membre" juste au-dessus.</p>
-		<p>Vous pouvez effectuer une recherche par Rayon/Catégorie/Déscription...</p>
+		<p id='texte'>Si vous êtes directeur d'un magasin, vous pouvez accéder à notre section membre via l'onglet "membre" juste au-dessus.</p>
+		<p id='texte'>Vous pouvez effectuer une recherche par nom de produit ou par description ou bien les deux à la fois.</p>
 		<br/>
 		<hr/>
 		<br/>
@@ -33,7 +33,7 @@
 
 					echo "<tr>";
 						for($i=0;$i<count($res);$i++){
-							echo "<td id='tdlist'><a href=\"resultat.php?rayon=".$res[$i][0]."\">".$res[$i][0]."</a><td/>";
+							echo "<td id='tdlist'><a href=\"resultat.php?rayon=".$res[$i][0]."\">".ucfirst($res[$i][0])."</a><td/>";
 						}
 					echo "</tr>";
 					echo "<tr id='trlist'>";
@@ -43,7 +43,7 @@
 							echo "<td id='tdlist'>";
 							
 							for($j=0;$j<count($res2);$j++){
-								echo "<a href=\"resultat.php?type=".$res2[$j][0]."\">".$res2[$j][0]."<br/>";
+								echo "<a href=\"resultat.php?type=".$res2[$j][0]."\">".ucfirst($res2[$j][0])."<br/>";
 							}
 							
 							echo "<td>";			

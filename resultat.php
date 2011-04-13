@@ -40,32 +40,35 @@
 				}else{
 					//c'est une recherche.
 					//vérification de la validité du formulaire précédent.
-					if(empty($_POST["recherche"])|| (!isset($_POST["description"]) && !isset($_POST["nom"]))){
-						echo "<p>Le champ de recherche est vide.<br/>".
-						     "Veuillez compléter de nouveau le formulaire de recherche.</p>";
+					if(empty($_POST["recherche"])|| (!isset($_POST["description"]) && !isset($_POST["nom"]) && !isset($_POST["reference"]))){
+						echo "<p>L'un des champs de recherche est vide.<br/>".
+						     "Veuillez compléter de nouveau le formulaire de recherche. </p>
+						     <p>Attention : il faut que description, nom ou référence soit coché.</p>";
 				
 					}else{
 
 						echo "<p>Vous recherchez : ".$_POST["recherche"]."</p><hr/>";
-						echo "<p>";
 
-						
+						$desc='';
+						$nom='';
+						$ref='';
 
 						if(isset($_POST["description"])){
-							$req='Select id_p,nom_p,description From Produit Where description REGEXP "[[:<:]]'.$_POST["recherche"].'[[:>:]]"';
-							$res=execute_requete($req);
+							$desc= 'or description REGEXP "[[:<:]]'.$_POST['recherche'].'[[:>:]]"';
 						}
 
 						if(isset($_POST["nom"])){
-							$req='Select id_p,nom_p,description From Produit Where nom_p REGEXP "[[:<:]]'.$_POST["recherche"].'[[:>:]]"';
-							$res=execute_requete($req);
+							$nom= 'or nom_p REGEXP "[[:<:]]'.$_POST['recherche'].'[[:>:]]"';
+						}
+	
+						if(isset($_POST["reference"])){
+							$ref= 'or ref REGEXP "[[:<:]]'.$_POST['recherche'].'[[:>:]]"';
 						}
 				
-						if(isset($_POST["description"]) && isset($_POST["nom"])){
-							$req='Select id_p,nom_p,description From Produit Where description REGEXP "[[:<:]]'.$_POST["recherche"].'[[:>:]]" Or nom_p REGEXP "[[:<:]]'.$_POST["recherche"].'[[:>:]]"';
-							$res=execute_requete($req);
-						}
-				
+						//on fait notre requête pour récupérer les produits recherchés par l'utilisateur.
+						$req='Select id_p,nom_p,description From Produit Where 0 '.$desc.$nom.$ref;
+						$res=execute_requete($req);
+
 						if(empty($res)){
 							echo "<p>Aucun résultat.</p>";
 						}else{

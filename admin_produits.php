@@ -18,7 +18,7 @@
 		{
 			if (isset($_SESSION['id_ens']) || isset($_SESSION['admin']))
 			{
-				if(isset($_POST['id_p']))
+				if(isset($_POST['id_p']) && $_POST['type']!='defaut')
 				{
 					if(isset($_POST['supp_produit']) and $_POST['supp_produit']=="on")
 					{
@@ -48,7 +48,7 @@
 				}
 				$tab_types=execute_requete('SELECT type FROM Type');
 				echo"<br/>Ajouter un produit<br/><table id='list'>";
-				echo '<tr><form action="" method=POST><input type="hidden" name="id_p" value=""/><td><input type="text" name="ref" value="Reference"/><td><input type="text" name="nom_p" value="nom du produit"/></td><td><select name="type">';
+				echo '<tr><form action="" method=POST><input type="hidden" name="id_p" value=""/><td><input type="text" name="ref" value="Référence"/><td><input type="text" name="nom_p" value="nom du produit"/></td><td><select name="type"><option value=\'defaut\'>Choisir un type</option>';
 					foreach($tab_types as $type)
 					{
 						echo '<option value="'.$type['type'].'">'.$type['type'].'</option>';
