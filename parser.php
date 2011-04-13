@@ -100,6 +100,15 @@
 					{
 						$tab[1]=htmlspecialchars($tab[1],ENT_QUOTES);//On échappe les " et '
 						$tab[4]=htmlspecialchars($tab[4],ENT_QUOTES);//Dans le titre et la desciption
+						if (empty($tab[0]))
+						{
+							$chaine = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+							$taille=6;
+							for ($i=0; $i<$taille; $i++)
+							{
+								$tab[0].=$chaine[mt_rand(0,35)];
+							}
+						}
 						$requete='INSERT IGNORE INTO Produit(ref,nom_p,type,description) VALUES("'.$tab[0].'","'.$tab[1].'","'.$tab[2].'","'.$tab[4].'")';
 						if (execute_requete($requete))//Ajout du produit dans la table
 						{
