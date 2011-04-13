@@ -16,7 +16,11 @@ body {
 	background-image: url('../images/fond.jpg');
 	background-repeat: no-repeat;
 }
-
+#chemin{
+	text-align:left;
+	font-style:italic;
+	font-size:14px;
+}
 #corps{
 	border:ridge;
 	text-align:center;
@@ -112,6 +116,7 @@ body {
 
 #titreP{
 	font-weight:bold;
+	font-size:22px;
 }
 
 #tlogin{
