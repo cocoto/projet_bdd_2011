@@ -286,7 +286,7 @@
 								echo'</td></select>
 						</tr>
 						<tr>
-							<td><label for="ens_mag">Enseigne :</label></td>
+							<td><label for="taille_mag">Taille du magasin :</label></td>
 							<td><select name="taille_mag"><OPTION>"Taille du magasin"</OPTION>'; 
 									echo'<OPTION VALUE="1"';
 									if($taille==1){echo'selected="selected"';}

@@ -32,7 +32,7 @@
 						echo "Problème lors des modifications";
 					}
 				}
-				echo"<table>";
+				echo"<table><th>Nom du produit</th><th>Catégorie</th><th>Prix</th><th>Disponibilité</th>";
 				$requete="SELECT Produit.id_p, type, nom_p,dispo,prix FROM Produit LEFT OUTER JOIN (SELECT id_p,prix,dispo FROM Tarif WHERE id_mag=".$_SESSION['id_mag'].") test ON Produit.id_p = test.id_p ORDER BY dispo DESC,type,nom_p";
 				$tab_resultat=execute_requete($requete);
 				foreach ($tab_resultat as $ligne)
