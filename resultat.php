@@ -80,7 +80,6 @@
 							}
 	
 						}
-						echo "</p>";
 					}
 				}//fin de la recherche
 			}
