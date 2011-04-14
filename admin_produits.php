@@ -18,14 +18,14 @@
 		{
 			if (isset($_SESSION['id_ens']) || isset($_SESSION['admin']))
 			{
-				if(isset($_post['id_p']) && $_post['type']!='defaut')
+				if(isset($_POST['id_p']) && $_POST['type']!='defaut')
 				{
-					if(isset($_post['supp_produit']) and $_post['supp_produit']=="on")
+					if(isset($_POST['supp_produit']) and $_POST['supp_produit']=="on")
 					{
-						$requete='DELETE FROM Tarif WHERE id_p="'.$_post['id_p'].'"';
+						$requete='DELETE FROM Tarif WHERE id_p="'.$_POST['id_p'].'"';
 						if(execute_requete($requete))
 						{
-							$requete='DELETE FROM Produit WHERE id_p="'.$_post['id_p'].'"';
+							$requete='DELETE FROM Produit WHERE id_p="'.$_POST['id_p'].'"';
 						}
 						else
 						{
@@ -34,7 +34,7 @@
 					}
 					else
 					{
-						$requete='REPLACE INTO Produit(id_p,ref,type,nom_p,description) VALUES ("'.$_post['id_p'].'","'.htmlspecialchars($_post['ref']).'","'.$_post['type'].'","'.htmlspecialchars($_post['nom_p']).'","'.htmlspecialchars($_post['description']).'")';	
+						$requete='REPLACE INTO Produit(id_p,ref,type,nom_p,description) VALUES ("'.$_POST['id_p'].'","'.htmlspecialchars($_POST['ref']).'","'.$_POST['type'].'","'.htmlspecialchars($_POST['nom_p']).'","'.htmlspecialchars($_POST['description']).'")';	
 					}
 
 					if(execute_requete($requete))

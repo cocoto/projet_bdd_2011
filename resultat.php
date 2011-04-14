@@ -3,7 +3,7 @@
 
 <head>
 	<title>Comparateur : résultat de la recherche</title>
-	<link rel="stylesheet" type="text/css" href="CSS/style.css">
+	<link rel="stylesheet" type="text/css" href="CSS/style.css"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
@@ -22,8 +22,8 @@
 				
 				$res=execute_requete($req);
 				foreach($res as $tab){
-					echo "<p id='titreP'><a href='info_produit.php?id_p=".$tab["id_p"]."' >".$tab["nom_p"]."</a></p>";
-					echo "<p id='description'>description : ".$tab["description"]."</p>";
+					echo "<p class='titreP'><a href='info_produit.php?id_p=".$tab["id_p"]."' >".$tab["nom_p"]."</a></p>";
+					echo "<p class='description'>description : ".$tab["description"]."</p>";
 					echo "<hr/><br/>";
 				}
 			}else{
@@ -32,37 +32,37 @@
 					$req='Select id_p,nom_p,description From Produit Where type="'.$_GET['type'].'"';
 					$res=execute_requete($req);
 					foreach($res as $tab){
-						echo "<p id='titreP'><a href='info_produit.php?id_p=".$tab["id_p"]."' >".$tab["nom_p"]."</a></p>";
-						echo "<p id='description'>description : ".$tab["description"]."</p>";
+						echo "<p class='titreP'><a href='info_produit.php?id_p=".$tab["id_p"]."' >".$tab["nom_p"]."</a></p>";
+						echo "<p class='description'>description : ".$tab["description"]."</p>";
 						echo "<hr/><br/>";
 					}
 
 				}else{
 					//c'est une recherche.
 					//vérification de la validité du formulaire précédent.
-					if(empty($_post["recherche"])|| (!isset($_post["description"]) && !isset($_post["nom"]) && !isset($_post["reference"]))){
+					if(empty($_POST["recherche"]) || (!isset($_POST["description"]) && !isset($_POST["nom"]) && !isset($_POST["reference"]))){
 						echo "<p>L'un des champs de recherche est vide.<br/>".
 						     "Veuillez compléter de nouveau le formulaire de recherche. </p>
 						     <p>Attention : il faut que description, nom ou référence soit coché.</p>";
 				
 					}else{
 
-						echo "<p>Vous recherchez : ".$_post["recherche"]."</p><hr/>";
+						echo "<p>Vous recherchez : ".$_POST["recherche"]."</p><hr/>";
 
 						$desc='';
 						$nom='';
 						$ref='';
 
-						if(isset($_post["description"])){
-							$desc= 'or description REGEXP "[[:<:]]'.$_post['recherche'].'[[:>:]]"';
+						if(isset($_POST["description"])){
+							$desc= 'or description REGEXP "[[:<:]]'.$_POST['recherche'].'[[:>:]]"';
 						}
 
-						if(isset($_post["nom"])){
-							$nom= 'or nom_p REGEXP "[[:<:]]'.$_post['recherche'].'[[:>:]]"';
+						if(isset($_POST["nom"])){
+							$nom= 'or nom_p REGEXP "[[:<:]]'.$_POST['recherche'].'[[:>:]]"';
 						}
 	
-						if(isset($_post["reference"])){
-							$ref= 'or ref REGEXP "[[:<:]]'.$_post['recherche'].'[[:>:]]"';
+						if(isset($_POST["reference"])){
+							$ref= 'or ref REGEXP "[[:<:]]'.$_POST['recherche'].'[[:>:]]"';
 						}
 				
 						//on fait notre requête pour récupérer les produits recherchés par l'utilisateur.
@@ -74,8 +74,8 @@
 						}else{
 							
 							foreach($res as $tab){
-								echo "<p id='titreP'><a href='info_produit.php?id_p=".$tab["id_p"]."' >".$tab["nom_p"]."</a></p>";
-								echo "<p id='description'>description : ".$tab["description"]."</p>";
+								echo "<p class='titreP'><a href='info_produit.php?id_p=".$tab["id_p"]."' >".$tab["nom_p"]."</a></p>";
+								echo "<p class='description'>description : ".$tab["description"]."</p>";
 								echo "<hr/><br/>";
 							}
 	

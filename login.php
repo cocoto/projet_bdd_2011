@@ -15,16 +15,16 @@
 		<?php	
 			if(connection_base())
 			{
-				if(isset($_post['username'])&&isset($_post['mdp']))
+				if(isset($_POST['username'])&&isset($_POST['mdp']))
 				{
-					if($_post['username']=="admin" && $_post['mdp']=="admin")
+					if($_POST['username']=="admin" && $_POST['mdp']=="admin")
 					{
 						$_SESSION['admin']="Administrateur du site";
 					}
 					else
 					{
-						$username=htmlspecialchars($_post['username']);
-						$mdp=sha1($_post['mdp']);
+						$username=htmlspecialchars($_POST['username']);
+						$mdp=sha1($_POST['mdp']);
 						$requete='SELECT id_ens,nom_ens FROM Enseigne WHERE nom_ens="'.$username.'" AND mdp="'.$mdp.'"';
 						$resultat=execute_requete($requete);
 						if(count($resultat)>0)

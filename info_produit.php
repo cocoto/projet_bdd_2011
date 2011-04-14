@@ -26,11 +26,11 @@
 					$requete='SELECT nom_ens,nom_m,ville,taille,prix,dispo FROM Tarif NATURAL JOIN Magasin JOIN Enseigne on Magasin.id_ens=Enseigne.id_ens WHERE id_p="'.$_GET['id_p'].'" ORDER BY dispo DESC, prix ASC';
 					if ($resultat=execute_requete($requete))
 					{
-						echo '<div id="table_prix"><table id=\'ttable_prix\'><th id="tdtable_prix">Enseigne</th><th id="tdtable_prix">Magasin</th><th id="tdtable_prix">Ville</th><th id="tdtable_prix">prix</th><th id="tdtable_prix">disponibilité</th>';
+						echo '<div id="table_prix"><table id=\'ttable_prix\'><tr><th class="tdtable_prix">Enseigne</th><th class="tdtable_prix">Magasin</th><th class="tdtable_prix">Ville</th><th class="tdtable_prix">prix</th><th class="tdtable_prix">disponibilité</th></tr>';
 						foreach($resultat as $ligne)
 						{
 							$dispo=$ligne['dispo']==1?"oui":"non";
-							echo '<tr><td id="tdtable_prix">'.$ligne['nom_ens'].'</td><td id="tdtable_prix">'.$ligne['nom_m'].'</td><td id="tdtable_prix">'.$ligne['ville'].'</td><td id="tdtable_prix">'.$ligne['prix'].'</td><td id="tdtable_prix">'.$dispo.'</td></tr>';
+							echo '<tr><td class="tdtable_prix">'.$ligne['nom_ens'].'</td><td class="tdtable_prix">'.$ligne['nom_m'].'</td><td class="tdtable_prix">'.$ligne['ville'].'</td><td class="tdtable_prix">'.$ligne['prix'].'</td><td class="tdtable_prix">'.$dispo.'</td></tr>';
 						}
 						echo"</table></div>";
 					}

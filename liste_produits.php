@@ -18,11 +18,11 @@
 		{
 			if (isset($_SESSION['id_mag']))
 			{
-				if(isset($_post['id_p']))
+				if(isset($_POST['id_p']))
 				{
-					$prix=htmlspecialchars($_post['prix']);
-					$dispo=isset($_post['dispo'])?1:0;
-					$requete='REPLACE INTO Tarif(id_p,id_mag,prix,dispo) VALUES ("'.$_post['id_p'].'","'.$_SESSION['id_mag'].'","'.$prix.'","'.$dispo.'")';
+					$prix=htmlspecialchars($_POST['prix']);
+					$dispo=isset($_POST['dispo'])?1:0;
+					$requete='REPLACE INTO Tarif(id_p,id_mag,prix,dispo) VALUES ("'.$_POST['id_p'].'","'.$_SESSION['id_mag'].'","'.$prix.'","'.$dispo.'")';
 					if(execute_requete($requete))
 					{
 						echo "Modifications effectuées";

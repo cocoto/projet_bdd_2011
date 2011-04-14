@@ -33,7 +33,7 @@ body {
 	display:table;	
 }
 
-#description{
+.description{
 	text-align:justify;
 	font-style:italic;
 }
@@ -120,7 +120,7 @@ body {
 	text-align:justify;
 }
 
-#titreP{
+.titreP{
 	font-weight:bold;
 	font-size:22px;
 }
@@ -139,6 +139,6 @@ body {
 }
 
 
-#tdtable_prix{
+.tdtable_prix{
 	border:outset;
 }

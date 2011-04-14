@@ -21,22 +21,22 @@
 				if(connection_base())
 				{
 					echo '<a href="admin_produits.php">Administration des produits</a>';
-					if(isset($_post['nom_ens']))
+					if(isset($_POST['nom_ens']))
 					{
 						
 						
-						if(!empty($_post['nom_ens'])&&!empty($_post['dirg_ens'])&&!empty($_post['pass_ens']))
+						if(!empty($_POST['nom_ens'])&&!empty($_POST['dirg_ens'])&&!empty($_POST['pass_ens']))
 						{
-							if(isset($_post['supp_ens'])&&$_post['supp_ens']=="on")
+							if(isset($_POST['supp_ens'])&&$_POST['supp_ens']=="on")
 							{
-								$requete='DELETE Enseigne, Magasin FROM Enseigne, Magasin WHERE Magasin.id_ens="'.$_post['id_ens'].'" and Enseigne.id_ens="'.$_post['id_ens'].'"';
+								$requete='DELETE Enseigne, Magasin FROM Enseigne, Magasin WHERE Magasin.id_ens="'.$_POST['id_ens'].'" and Enseigne.id_ens="'.$_POST['id_ens'].'"';
 							}
 							else
 							{
-								$nom=htmlspecialchars($_post['nom_ens']);
-								$dirg_ens=htmlspecialchars($_post['dirg_ens']);
-								$mdp=empty($_post['pass_ens'])?"":sha1(htmlspecialchars($_post['pass_ens']));
-								$requete='REPLACE INTO Enseigne(id_ens,nom_ens,nom_dirg,mdp) VALUES("'.$_post['id_ens'].'","'.$nom.'","'.$dirg_ens.'","'.$mdp.'")';
+								$nom=htmlspecialchars($_POST['nom_ens']);
+								$dirg_ens=htmlspecialchars($_POST['dirg_ens']);
+								$mdp=empty($_POST['pass_ens'])?"":sha1(htmlspecialchars($_POST['pass_ens']));
+								$requete='REPLACE INTO Enseigne(id_ens,nom_ens,nom_dirg,mdp) VALUES("'.$_POST['id_ens'].'","'.$nom.'","'.$dirg_ens.'","'.$mdp.'")';
 								
 							}
 							if(execute_requete($requete))
@@ -53,23 +53,23 @@
 							echo "Vous n'avez pas remplis tous les champs";
 						}
 					}
-					if(isset($_post['nom_mag']))
+					if(isset($_POST['nom_mag']))
 					{
-						if(!empty($_post['nom_mag'])&&!empty($_post['dirg_mag'])&&!empty($_post['ville_mag'])&&!empty($_post['pass_mag'])&&!empty($_post['ens_mag'])&&!empty($_post['taille_mag']))
+						if(!empty($_POST['nom_mag'])&&!empty($_POST['dirg_mag'])&&!empty($_POST['ville_mag'])&&!empty($_POST['pass_mag'])&&!empty($_POST['ens_mag'])&&!empty($_POST['taille_mag']))
 						{
-							if(isset($_post['supp_mag'])&&$_post['supp_mag']=="on")
+							if(isset($_POST['supp_mag'])&&$_POST['supp_mag']=="on")
 							{
-								$requete='DELETE FROM Magasin WHERE id_mag="'.$_post['id_mag'].'"';
+								$requete='DELETE FROM Magasin WHERE id_mag="'.$_POST['id_mag'].'"';
 							}
 							else
 							{
-								$nom=htmlspecialchars($_post['nom_mag']);
-								$dirg_ens=htmlspecialchars($_post['dirg_mag']);
-								$ville=htmlspecialchars($_post['ville_mag']);
-								$ens=$_post['ens_mag'];
-								$taille=$_post['taille_mag'];
-								$mdp=sha1(htmlspecialchars($_post['pass_mag']));
-								$requete='REPLACE INTO Magasin(id_mag,nom_m,nom_resp,taille,ville,id_ens,mdp) VALUES("'.$_post['id_mag'].'","'.$nom.'","'.$dirg_ens.'","'.$taille.'","'.$ville.'","'.$ens.'","'.$mdp.'")';	
+								$nom=htmlspecialchars($_POST['nom_mag']);
+								$dirg_ens=htmlspecialchars($_POST['dirg_mag']);
+								$ville=htmlspecialchars($_POST['ville_mag']);
+								$ens=$_POST['ens_mag'];
+								$taille=$_POST['taille_mag'];
+								$mdp=sha1(htmlspecialchars($_POST['pass_mag']));
+								$requete='REPLACE INTO Magasin(id_mag,nom_m,nom_resp,taille,ville,id_ens,mdp) VALUES("'.$_POST['id_mag'].'","'.$nom.'","'.$dirg_ens.'","'.$taille.'","'.$ville.'","'.$ens.'","'.$mdp.'")';	
 							}
 							if(execute_requete($requete))
 							{
@@ -85,18 +85,18 @@
 							echo "Vous n'avez pas remplis tous les champs";
 						}
 					}
-					if(isset($_post['nom_rayon']) && !empty($_post['nom_rayon']))
+					if(isset($_POST['nom_rayon']) && !empty($_POST['nom_rayon']))
 					{
-						if(isset($_post['supp_rayon']) && $_post['supp_rayon']=="on")
+						if(isset($_POST['supp_rayon']) && $_POST['supp_rayon']=="on")
 							{
 								$requete='DELETE FROM Tarif
-								WHERE Tarif.id_p in (SELECT id_p FROM Produit WHERE type in (SELECT type FROM Type WHERE rayon="'.$_post['nom_rayon'].'"))';
+								WHERE Tarif.id_p in (SELECT id_p FROM Produit WHERE type in (SELECT type FROM Type WHERE rayon="'.$_POST['nom_rayon'].'"))';
 								if(execute_requete($requete))
 								{
-									$requete='DELETE FROM Produit WHERE type in (SELECT type FROM Type WHERE rayon="'.$_post['nom_rayon'].'")';
+									$requete='DELETE FROM Produit WHERE type in (SELECT type FROM Type WHERE rayon="'.$_POST['nom_rayon'].'")';
 									if (execute_requete($requete))
 									{
-										$requete='DELETE FROM Type Where Rayon="'.$_post['nom_rayon'].'"';
+										$requete='DELETE FROM Type Where Rayon="'.$_POST['nom_rayon'].'"';
 									}
 									else
 									{
@@ -112,9 +112,9 @@
 							}
 							else
 							{
-								$nom=htmlspecialchars($_post['nom_rayon']);
+								$nom=htmlspecialchars($_POST['nom_rayon']);
 								$requete='UPDATE Type
-										SET Type.rayon="'.$nom.'" WHERE Type.rayon="'.$_post['nom_rayon_ans'].'"';
+										SET Type.rayon="'.$nom.'" WHERE Type.rayon="'.$_POST['nom_rayon_ans'].'"';
 							}
 							if(execute_requete($requete))
 							{
@@ -125,18 +125,18 @@
 								echo "Problème lors de la modification, merci de renseigner tous les champs";
 							}
 					}
-					if(isset($_post['nom_type']))
+					if(isset($_POST['nom_type']))
 					{
-						if(!empty($_post['nom_type']) && isset($_post['nom_trayon']) && !empty($_post['nom_trayon']))
+						if(!empty($_POST['nom_type']) && isset($_POST['nom_trayon']) && !empty($_POST['nom_trayon']))
 						{
-							if(isset($_post['supp_type']) && $_post['supp_type']=="on")
+							if(isset($_POST['supp_type']) && $_POST['supp_type']=="on")
 							{
 								$requete='DELETE Tarif,Type FROM Tarif,Produit,Type
-								WHERE Type.type="'.$_post['nom_type_ans'].'" AND Tarif.id_p in
-								(SELECT id_p FROM Produit WHERE type="'.$_post['nom_type_ans'].'")';
+								WHERE Type.type="'.$_POST['nom_type_ans'].'" AND Tarif.id_p in
+								(SELECT id_p FROM Produit WHERE type="'.$_POST['nom_type_ans'].'")';
 								if(execute_requete($requete))
 								{
-									$requete='DELETE FROM Produit WHERE type="'.$_post['nom_type_ans'].'"';
+									$requete='DELETE FROM Produit WHERE type="'.$_POST['nom_type_ans'].'"';
 								}
 								else
 								{
@@ -146,11 +146,11 @@
 							}
 							else
 							{
-								$nom=htmlspecialchars($_post['nom_type']);
-								$rayon=htmlspecialchars(empty($_post['ajout_rayon'])?$_post['nom_trayon']:$_post['ajout_rayon']);
+								$nom=htmlspecialchars($_POST['nom_type']);
+								$rayon=htmlspecialchars(empty($_POST['ajout_rayon'])?$_POST['nom_trayon']:$_POST['ajout_rayon']);
 								$requete='UPDATE Type,Produit 
 										SET Type.type="'.$nom.'",Type.rayon="'.$rayon.'",Produit.type="'.$nom.'" 
-											WHERE Type.type="'.$_post['nom_type_ans'].'" and Produit.type="'.$_post['nom_type_ans'].'"';
+											WHERE Type.type="'.$_POST['nom_type_ans'].'" and Produit.type="'.$_POST['nom_type_ans'].'"';
 								if(execute_requete($requete))
 								{
 									$requete='REPLACE INTO Type(type,rayon) VALUES("'.$nom.'","'.$rayon.'")';
@@ -194,15 +194,15 @@
 					$nom_dirg="";
 					$valid="Ajouter";
 					$id_ens="";
-					if(isset($_post['id_ens']))
+					if(isset($_POST['id_ens']))
 					{
-						$requete='SELECT nom_ens,nom_dirg FROM Enseigne WHERE id_ens="'.$_post['id_ens'].'"';
+						$requete='SELECT nom_ens,nom_dirg FROM Enseigne WHERE id_ens="'.$_POST['id_ens'].'"';
 						if($resultat=execute_requete($requete))
 						{
 							$nom=$resultat[0]['nom_ens'];
 							$nom_dirg=$resultat[0]['nom_dirg'];
 							$valid="Modifier";
-							$id_ens=$_post['id_ens'];
+							$id_ens=$_POST['id_ens'];
 						}
 					}
 					echo '<form action="" method="post"><input type="hidden" name="id_ens" value="'.$id_ens.'"/><table>
@@ -247,9 +247,9 @@
 					$id_ens="";
 					$ville="";
 					$id_mag="";
-					if(isset($_post['id_mag']))
+					if(isset($_POST['id_mag']))
 					{
-						$requete='SELECT nom_m,nom_resp,taille,ville,id_ens FROM Magasin WHERE id_mag="'.$_post['id_mag'].'"';
+						$requete='SELECT nom_m,nom_resp,taille,ville,id_ens FROM Magasin WHERE id_mag="'.$_POST['id_mag'].'"';
 						if($resultat=execute_requete($requete))
 						{
 							$nom=$resultat[0]['nom_m'];
@@ -258,7 +258,7 @@
 							$id_ens=$resultat[0]['id_ens'];
 							$taille=$resultat[0]['taille'];
 							$ville=$resultat[0]['ville'];
-							$id_mag=$_post['id_mag'];
+							$id_mag=$_POST['id_mag'];
 						}
 					}
 					echo '<form action="" method="post"><input type="hidden" name="id_mag" value="'.$id_mag.'"/><table>
@@ -325,9 +325,9 @@
 						}
 						echo '</select></form>';
 					}
-					if(isset($_post['nom_rayon_ans']))
+					if(isset($_POST['nom_rayon_ans']))
 					{
-						$requete='SELECT rayon FROM Type WHERE rayon="'.$_post['nom_rayon_ans'].'"';
+						$requete='SELECT rayon FROM Type WHERE rayon="'.$_POST['nom_rayon_ans'].'"';
 						if($resultat=execute_requete($requete))
 						{
 							$nom_ans=$resultat[0]['rayon'];
@@ -366,9 +366,9 @@
 					$nom="";
 					$rayon="";
 					$valid="Ajouter";
-					if(isset($_post['nom_type_ans']))
+					if(isset($_POST['nom_type_ans']))
 					{
-						$requete='SELECT type,rayon FROM Type WHERE type="'.$_post['nom_type_ans'].'"';
+						$requete='SELECT type,rayon FROM Type WHERE type="'.$_POST['nom_type_ans'].'"';
 						if($resultat=execute_requete($requete))
 						{
 							$nom_ans=$resultat[0]['type'];
