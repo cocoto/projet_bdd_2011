@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
 <head>
 	<title>Comparateur de prix</title>
-	<link href="CSS/style.css" rel="stylesheet" type="text/css">
+	<link href="CSS/style.css" rel="stylesheet" type="text/css"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 </head>

@@ -116,7 +116,7 @@ body {
 	text-align:left;
 }
 
-#texte{
+.texte{
 	text-align:justify;
 }
 
@@ -134,7 +134,7 @@ body {
 	text-align:left;
 }
 
-#tdlist{
+.tdlist{
 	border:outset;
 }
 

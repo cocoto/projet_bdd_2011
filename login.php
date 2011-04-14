@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
 <head>
 	<title>Comparateur de prix</title>
-	<link href="CSS/style.css" rel="stylesheet" type="text/css">
+	<link href="CSS/style.css" rel="stylesheet" type="text/css"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 </head>
@@ -15,16 +15,16 @@
 		<?php	
 			if(connection_base())
 			{
-				if(isset($_POST['username'])&&isset($_POST['mdp']))
+				if(isset($_post['username'])&&isset($_post['mdp']))
 				{
-					if($_POST['username']=="admin" && $_POST['mdp']=="admin")
+					if($_post['username']=="admin" && $_post['mdp']=="admin")
 					{
 						$_SESSION['admin']="Administrateur du site";
 					}
 					else
 					{
-						$username=htmlspecialchars($_POST['username']);
-						$mdp=sha1($_POST['mdp']);
+						$username=htmlspecialchars($_post['username']);
+						$mdp=sha1($_post['mdp']);
 						$requete='SELECT id_ens,nom_ens FROM Enseigne WHERE nom_ens="'.$username.'" AND mdp="'.$mdp.'"';
 						$resultat=execute_requete($requete);
 						if(count($resultat)>0)

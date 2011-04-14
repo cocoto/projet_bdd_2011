@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
 <head>
 	<title>Comparateur de prix</title>
-	<link href="CSS/style.css" rel="stylesheet" type="text/css">
+	<link href="CSS/style.css" rel="stylesheet" type="text/css"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 </head>
@@ -18,11 +18,11 @@
 		{
 			if (isset($_SESSION['id_mag']))
 			{
-				if(isset($_POST['id_p']))
+				if(isset($_post['id_p']))
 				{
-					$prix=htmlspecialchars($_POST['prix']);
-					$dispo=isset($_POST['dispo'])?1:0;
-					$requete='REPLACE INTO Tarif(id_p,id_mag,prix,dispo) VALUES ("'.$_POST['id_p'].'","'.$_SESSION['id_mag'].'","'.$prix.'","'.$dispo.'")';
+					$prix=htmlspecialchars($_post['prix']);
+					$dispo=isset($_post['dispo'])?1:0;
+					$requete='REPLACE INTO Tarif(id_p,id_mag,prix,dispo) VALUES ("'.$_post['id_p'].'","'.$_SESSION['id_mag'].'","'.$prix.'","'.$dispo.'")';
 					if(execute_requete($requete))
 					{
 						echo "Modifications effectuées";
@@ -42,7 +42,7 @@
 						$prix=0;
 					}
 					$dispo = $ligne['dispo']? "checked":"";
-					echo '<tr><form action="" method=POST><input type="hidden" name="id_p" value="'.$ligne['id_p'].'"/><td><label for="'.$ligne['id_p'].'">'.$ligne['nom_p'].'</label></td><td>'.$ligne['type'].'</td><td><input type="text" name="prix" value="'.$ligne['prix'].'" id="'.$ligne['id_p'].'"/></td><td><input type="checkbox" name="dispo" '.$dispo.'/></td><td><input type="submit" value="valider"/></tr></form>';
+					echo '<tr><form action="" method="post"><input type="hidden" name="id_p" value="'.$ligne['id_p'].'"/><td><label for="'.$ligne['id_p'].'">'.$ligne['nom_p'].'</label></td><td>'.$ligne['type'].'</td><td><input type="text" name="prix" value="'.$ligne['prix'].'" id="'.$ligne['id_p'].'"/></td><td><input type="checkbox" name="dispo" '.$dispo.'/></td><td><input type="submit" value="valider"/></tr></form>';
 				}
 				echo '</table>';
 			}

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
 <head>
 	<title>Comparateur de prix</title>
-	<link href="CSS/style.css" rel="stylesheet" type="text/css">
+	<link href="CSS/style.css" rel="stylesheet" type="text/css"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 </head>
@@ -18,14 +18,14 @@
 		{
 			if (isset($_SESSION['id_ens']) || isset($_SESSION['admin']))
 			{
-				if(isset($_POST['id_p']) && $_POST['type']!='defaut')
+				if(isset($_post['id_p']) && $_post['type']!='defaut')
 				{
-					if(isset($_POST['supp_produit']) and $_POST['supp_produit']=="on")
+					if(isset($_post['supp_produit']) and $_post['supp_produit']=="on")
 					{
-						$requete='DELETE FROM Tarif WHERE id_p="'.$_POST['id_p'].'"';
+						$requete='DELETE FROM Tarif WHERE id_p="'.$_post['id_p'].'"';
 						if(execute_requete($requete))
 						{
-							$requete='DELETE FROM Produit WHERE id_p="'.$_POST['id_p'].'"';
+							$requete='DELETE FROM Produit WHERE id_p="'.$_post['id_p'].'"';
 						}
 						else
 						{
@@ -34,7 +34,7 @@
 					}
 					else
 					{
-						$requete='REPLACE INTO Produit(id_p,ref,type,nom_p,description) VALUES ("'.$_POST['id_p'].'","'.htmlspecialchars($_POST['ref']).'","'.$_POST['type'].'","'.htmlspecialchars($_POST['nom_p']).'","'.htmlspecialchars($_POST['description']).'")';	
+						$requete='REPLACE INTO Produit(id_p,ref,type,nom_p,description) VALUES ("'.$_post['id_p'].'","'.htmlspecialchars($_post['ref']).'","'.$_post['type'].'","'.htmlspecialchars($_post['nom_p']).'","'.htmlspecialchars($_post['description']).'")';	
 					}
 
 					if(execute_requete($requete))
@@ -48,7 +48,7 @@
 				}
 				$tab_types=execute_requete('SELECT type FROM Type');
 				echo"<br/>Ajouter un produit<br/><table id='list'>";
-				echo '<tr><form action="" method=POST><input type="hidden" name="id_p" value=""/><td><input type="text" name="ref" value="Référence"/><td><input type="text" name="nom_p" value="nom du produit"/></td><td><select name="type"><option value=\'defaut\'>Choisir un type</option>';
+				echo '<tr><form action="" method="post"><input type="hidden" name="id_p" value=""/><td><input type="text" name="ref" value="Référence"/><td><input type="text" name="nom_p" value="nom du produit"/></td><td><select name="type"><option value=\'defaut\'>Choisir un type</option>';
 					foreach($tab_types as $type)
 					{
 						echo '<option value="'.$type['type'].'">'.$type['type'].'</option>';
@@ -60,7 +60,7 @@
 				$tab_resultat=execute_requete($requete);
 				foreach ($tab_resultat as $ligne)
 				{
-					echo '<tr><form action="" method=POST><input type="hidden" name="id_p" value="'.$ligne['id_p'].'"/><td><input type="text" name="ref" value="'.$ligne['ref'].'"/><td><input type="text" name="nom_p" value="'.$ligne['nom_p'].'"/></td><td><select name="type">';
+					echo '<tr><form action="" method="post"><input type="hidden" name="id_p" value="'.$ligne['id_p'].'"/><td><input type="text" name="ref" value="'.$ligne['ref'].'"/><td><input type="text" name="nom_p" value="'.$ligne['nom_p'].'"/></td><td><select name="type">';
 					foreach($tab_types as $type)
 					{
 						$coche=$ligne['type']==$type['type']?"selected":"";

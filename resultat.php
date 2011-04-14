@@ -40,29 +40,29 @@
 				}else{
 					//c'est une recherche.
 					//vérification de la validité du formulaire précédent.
-					if(empty($_POST["recherche"])|| (!isset($_POST["description"]) && !isset($_POST["nom"]) && !isset($_POST["reference"]))){
+					if(empty($_post["recherche"])|| (!isset($_post["description"]) && !isset($_post["nom"]) && !isset($_post["reference"]))){
 						echo "<p>L'un des champs de recherche est vide.<br/>".
 						     "Veuillez compléter de nouveau le formulaire de recherche. </p>
 						     <p>Attention : il faut que description, nom ou référence soit coché.</p>";
 				
 					}else{
 
-						echo "<p>Vous recherchez : ".$_POST["recherche"]."</p><hr/>";
+						echo "<p>Vous recherchez : ".$_post["recherche"]."</p><hr/>";
 
 						$desc='';
 						$nom='';
 						$ref='';
 
-						if(isset($_POST["description"])){
-							$desc= 'or description REGEXP "[[:<:]]'.$_POST['recherche'].'[[:>:]]"';
+						if(isset($_post["description"])){
+							$desc= 'or description REGEXP "[[:<:]]'.$_post['recherche'].'[[:>:]]"';
 						}
 
-						if(isset($_POST["nom"])){
-							$nom= 'or nom_p REGEXP "[[:<:]]'.$_POST['recherche'].'[[:>:]]"';
+						if(isset($_post["nom"])){
+							$nom= 'or nom_p REGEXP "[[:<:]]'.$_post['recherche'].'[[:>:]]"';
 						}
 	
-						if(isset($_POST["reference"])){
-							$ref= 'or ref REGEXP "[[:<:]]'.$_POST['recherche'].'[[:>:]]"';
+						if(isset($_post["reference"])){
+							$ref= 'or ref REGEXP "[[:<:]]'.$_post['recherche'].'[[:>:]]"';
 						}
 				
 						//on fait notre requête pour récupérer les produits recherchés par l'utilisateur.

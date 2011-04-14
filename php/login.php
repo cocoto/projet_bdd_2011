@@ -17,15 +17,17 @@
 	}
 	else
 	{?>	
+		
+		<form action="login.php" method="post">
 		<table id='tlogin'>	
-		<form action="login.php" method=POST>
 			<tr>
-				<td>login : <input type=text name="username"/></td>
-				<td>password : <input type=password name="mdp"/></td>
-				<td><input type=submit value="connection"/></td>
+				<td>login : <input type="text" name="username"/></td>
+				<td>password : <input type="password" name="mdp"/></td>
+				<td><input type="submit" value="connection"/></td>
 			</tr>
+			</table>
 		</form>
-		</table>
+		
 		
 	<?php }
 	      echo "</div>";

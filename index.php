@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
 <head>
 	<title>Comparateur de prix</title>
-	<link href="CSS/style.css" rel="stylesheet" type="text/css">
+	<link href="CSS/style.css" rel="stylesheet" type="text/css"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 </head>
@@ -16,8 +16,8 @@
 
 		<h2>Bienvenue sur Notre comparateur de prix.</h2>
 		<?php include('php/nbProduit.php'); ?>
-		<p id='texte'>Si vous êtes directeur d'un magasin, vous pouvez accéder à notre section membre via l'onglet "membre" juste au-dessus.</p>
-		<p id='texte'>Vous pouvez effectuer une recherche par nom de produit ou par description ou bien les deux à la fois.</p>
+		<p class='texte'>Si vous êtes directeur d'un magasin, vous pouvez accéder à notre section membre via l'onglet "membre" juste au-dessus.</p>
+		<p class='texte'>Vous pouvez effectuer une recherche par nom de produit ou par description ou bien les deux à la fois.</p>
 		<br/>
 		<hr/>
 		<br/>
@@ -34,31 +34,25 @@
 
 					echo "<tr>";
 						for($i=0;$i<count($res);$i++){
-							echo "<td id='tdlist'><a href=\"resultat.php?rayon=".$res[$i][0]."\">".ucfirst($res[$i][0])."</a><td/>";
+							echo "<td class='tdlist'><a href=\"resultat.php?rayon=".$res[$i][0]."\">".ucfirst($res[$i][0])."</a></td>";
 						}
 					echo "</tr>";
 					echo "<tr id='trlist'>";
 						for($i=0;$i<count($res);$i++){
 							$req2='Select type From Type Where rayon="'.$res[$i][0].'"';
 							$res2=execute_requete($req2);
-							echo "<td id='tdlist'>";
+							echo "<td class='tdlist'>";
 							
 							for($j=0;$j<count($res2);$j++){
-								echo "<a href=\"resultat.php?type=".$res2[$j][0]."\">".ucfirst($res2[$j][0])."<br/>";
+								echo "<a href=\"resultat.php?type=".$res2[$j][0]."\">".ucfirst($res2[$j][0])."</a><br/>";
 							}
 							
-							echo "<td>";			
+							echo "</td>";			
 							
 						}	
 					echo "</tr>";
 					deconnection_base();
 				?>
-				<td>
-					<ul>
-						
-					</ul>
-				</td>
-			</tr>
 		</table>
 		
 	</div>
