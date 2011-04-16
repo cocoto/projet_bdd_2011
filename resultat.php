@@ -66,7 +66,7 @@
 						}
 				
 						//on fait notre requête pour récupérer les produits recherchés par l'utilisateur.
-						$req='Select id_p,nom_p,description From Produit Where 0 '.$desc.$nom.$ref;
+						$req='Select id_p ident,nom_p,description,prix From Produit NATURAL JOIN Tarif Where 0 '.$desc.$nom.$ref.' HAVING Prix >= ALL (SELECT prix From Tarif Where id_p=ident)';
 						$res=execute_requete($req);
 
 						if(empty($res)){
@@ -74,8 +74,9 @@
 						}else{
 							
 							foreach($res as $tab){
-								echo "<p class='titreP'><a href='info_produit.php?id_p=".$tab["id_p"]."' >".$tab["nom_p"]."</a></p>";
+								echo "<p class='titreP'><a href='info_produit.php?id_p=".$tab["ident"]."' >".$tab["nom_p"]."</a></p>";
 								echo "<p class='description'>description : ".$tab["description"]."</p>";
+								echo "<p class='prix_min'>Prix minimum : ".$tab["prix"]." €</p>";
 								echo "<hr/><br/>";
 							}
 	
