@@ -13,6 +13,16 @@
 	<?php include("php/fonctions.php"); ?>
 	<div id='corps'>
 	<h1>Liste des produits :</h1>
+	<div class='nouveau'><b><u>NOUVEAU : modification rapide de vos tarifs :</u></b><br/>
+		<a href="generateur_csv.php">--> Téléchargez votre grille tarifaire <--</a>
+		<form action="upload_prix.php" method="post" enctype="multipart/form-data">
+			<p>
+					Envoyez votre fichier complété :
+					<input type="file" name="fichier" />
+					<input type="submit" value="Envoyer le fichier" />
+			</p>
+		</form>
+	</div>
 	<?php	
 		if (connection_base())
 		{

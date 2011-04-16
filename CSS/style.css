@@ -94,7 +94,11 @@ body {
 	margin-left:auto;
 	margin-right:auto;
 }
-
+.nouveau{
+	border:dashed;
+	border-color:red;
+	margin-bottom:20px;
+}
 #table_prix{
 	margin-left:auto;
 	margin-right:auto;
