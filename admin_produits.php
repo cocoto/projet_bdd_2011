@@ -47,28 +47,26 @@
 					}
 				}
 				$tab_types=execute_requete('SELECT type FROM Type');
-				echo"<br/>Ajouter un produit<br/><table id='list'>";
-				echo '<tr><form action="" method="post"><input type="hidden" name="id_p" value=""/><td><input type="text" name="ref" value="Référence"/><td><input type="text" name="nom_p" value="nom du produit"/></td><td><select name="type"><option value=\'defaut\'>Choisir un type</option>';
+				echo"<br/>Ajouter un produit<br/>";
+				echo '<form action="" method="post"><p class="ligne"><input type="hidden" name="id_p" value=""/><span class="colone"><input type="text" name="ref" value="Référence"/></span><span class="colone"><input type="text" name="nom_p" value="nom du produit"/></span><span class="colone"><select name="type"><option value=\'defaut\'>Choisir un type</option>';
 					foreach($tab_types as $type)
 					{
 						echo '<option value="'.$type['type'].'">'.$type['type'].'</option>';
 					}
-					echo '</td><td><input type="textarea" name="description" value="Description"/><td><input type="submit" value="valider"/></tr></form>';
-				echo '</table><br/><br/>';
-				echo"<table id='list'>";
+					echo '</select></span><span class="colone"><textarea name="description" rows="5" cols="30">Description</textarea></span><span class="colone"><input type="submit" value="valider"/></span></p></form>';
+				echo '<br/><br/>';
 				$requete="SELECT Produit.id_p,ref, type, nom_p,description FROM Produit ORDER BY type,nom_p";
 				$tab_resultat=execute_requete($requete);
 				foreach ($tab_resultat as $ligne)
 				{
-					echo '<tr><form action="" method="post"><input type="hidden" name="id_p" value="'.$ligne['id_p'].'"/><td><input type="text" name="ref" value="'.$ligne['ref'].'"/><td><input type="text" name="nom_p" value="'.$ligne['nom_p'].'"/></td><td><select name="type">';
+					echo '<form action="" method="post"><p class="ligne"><input type="hidden" name="id_p" value="'.$ligne['id_p'].'"/><span class="colone"><input type="text" name="ref" value="'.$ligne['ref'].'"/></span><span class="colone"><input type="text" name="nom_p" value="'.$ligne['nom_p'].'"/></span><span class="colone"><select name="type">';
 					foreach($tab_types as $type)
 					{
-						$coche=$ligne['type']==$type['type']?"selected":"";
+						$coche=$ligne['type']==$type['type']?'selected="selected"':'';
 						echo '<option value="'.$type['type'].'" '.$coche.'>'.$type['type'].'</option>';
 					}
-					echo '</td><td><input type="textarea" name="description" value="'.$ligne['description'].'"/><td><input type="checkbox" name="supp_produit"/></td><td><input type="submit" value="valider"/></tr></form>';
+					echo '</select></span><span class="colone"><textarea name="description" rows="5" cols="30">'.$ligne['description'].'</textarea></span><span class="colone"><input type="checkbox" name="supp_produit"/></span><span class="colone"><input type="submit" value="valider"/></span></p></form>';
 				}
-				echo '</table>';
 			}
 			else
 			{

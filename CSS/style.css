@@ -21,6 +21,23 @@ body {
 	font-style:italic;
 	font-size:14px;
 }
+.ligne{
+	clear:both;
+}
+.ligne .colone_g{
+		display:block;
+		float:left;
+		width: 60%;
+		overflow:auto;
+}
+.ligne .colone_p{
+		display:block;
+		float:left;
+		width: 10%;
+}
+.ligne .colone_p .form_prix{
+		width:100%;
+}
 #corps{
 	border:ridge;
 	text-align:center;
@@ -96,6 +113,9 @@ body {
 	border:dashed;
 	border-color:red;
 	margin-bottom:20px;
+}
+.souligne{
+	text-decoration:underline;
 }
 #table_prix{
 	margin-left:auto;
