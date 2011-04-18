@@ -12,7 +12,7 @@
 	}
 	else if(isset($_SESSION['admin']))
 	{
-		echo 'Administrateur : <br/><input type="button" onclick="self.location.href=\'deco.php\'" value="Se déconnecter" /><input type="button" onclick="self.location.href=\'admin.php\'" value="Administration" />';
+		echo 'Administrateur <br/><input type="button" onclick="self.location.href=\'deco.php\'" value="Se déconnecter" /><input type="button" onclick="self.location.href=\'admin.php\'" value="Administration" />';
 
 	}
 	else
@@ -23,7 +23,7 @@
 			<tr>
 				<td>login : <input type="text" name="username"/></td>
 				<td>password : <input type="password" name="mdp"/></td>
-				<td><input type="submit" value="connection"/></td>
+				<td><input type="submit" value="connexion"/></td>
 			</tr>
 			</table>
 		</form>
