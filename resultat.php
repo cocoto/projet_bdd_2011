@@ -48,7 +48,7 @@
 						     <p>Attention : il faut que description, nom ou référence soit coché.</p>";
 				
 					}else{
-
+						$recherche=htmlspecialchars($_POST['recherche']);
 						echo "<p>Vous recherchez : ".$_POST["recherche"]."</p><hr/>";
 
 						$desc='';
@@ -56,15 +56,15 @@
 						$ref='';
 
 						if(isset($_POST["description"])){
-							$desc= 'or description REGEXP "[[:<:]]'.$_POST['recherche'].'[[:>:]]"';
+							$desc= 'or description REGEXP "[[:<:]]'.$recherche.'[[:>:]]"';
 						}
 
 						if(isset($_POST["nom"])){
-							$nom= 'or nom_p REGEXP "[[:<:]]'.$_POST['recherche'].'[[:>:]]"';
+							$nom= 'or nom_p REGEXP "[[:<:]]'.$recherche.'[[:>:]]"';
 						}
 	
 						if(isset($_POST["reference"])){
-							$ref= 'or ref REGEXP "[[:<:]]'.$_POST['recherche'].'[[:>:]]"';
+							$ref= 'or ref REGEXP "[[:<:]]'.$recherche.'[[:>:]]"';
 						}
 				
 						//on fait notre requête pour récupérer les produits recherchés par l'utilisateur.
