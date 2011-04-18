@@ -18,22 +18,24 @@
 			//on regarde de quelle façon la page a été appelée.
 			if(isset($_GET['rayon'])){
 				//on affiche tous les produits du rayon.
-				$req='Select id_p,nom_p,description From Produit NATURAL JOIN (Select type From Type where rayon="'.$_GET['rayon'].'") as T1';
+				$req='Select id_p ident,nom_p,description,prix From Tarif NATURAL JOIN Produit NATURAL JOIN (Select type From Type where rayon="'.$_GET['rayon'].'") as T1 HAVING Prix <= ALL (SELECT prix From Tarif where Id_p=ident)';
 				
 				$res=execute_requete($req);
 				foreach($res as $tab){
-					echo "<p class='titreP'><a href='info_produit.php?id_p=".$tab["id_p"]."' >".$tab["nom_p"]."</a></p>";
+					echo "<p class='titreP'><a href='info_produit.php?id_p=".$tab["ident"]."' >".$tab["nom_p"]."</a></p>";
 					echo "<p class='description'>description : ".$tab["description"]."</p>";
+					echo "<p class='prix_min'>Prix minimum : ".$tab["prix"]." €</p>";
 					echo "<hr/><br/>";
 				}
 			}else{
 				if(isset($_GET['type'])){
 					//on affiche tous les produits de ce type.
-					$req='Select id_p,nom_p,description From Produit Where type="'.$_GET['type'].'"';
+					$req='Select id_p ident,nom_p,description,prix From Produit NATURAL JOIN Tarif Where type="'.$_GET['type'].'" HAVING Prix <= ALL (SELECT prix From Tarif Where id_p=ident)';
 					$res=execute_requete($req);
 					foreach($res as $tab){
-						echo "<p class='titreP'><a href='info_produit.php?id_p=".$tab["id_p"]."' >".$tab["nom_p"]."</a></p>";
+						echo "<p class='titreP'><a href='info_produit.php?id_p=".$tab["ident"]."' >".$tab["nom_p"]."</a></p>";
 						echo "<p class='description'>description : ".$tab["description"]."</p>";
+						echo "<p class='prix_min'>Prix minimum : ".$tab["prix"]." €</p>";
 						echo "<hr/><br/>";
 					}
 
