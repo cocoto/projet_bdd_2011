@@ -383,15 +383,17 @@
 							<td><input type="text" name="nom_type" id="nom_type" value="'.$nom.'"/></td>
 						</tr>
 						<tr>
-							<td><label for="nom_trayon">Rayon :</label></td>
-							<td><select name="nom_trayon" id="nom_trayon"><option>Choisir rayon</option>';
+							<td>Rayon :</td><td>';
+								$i=0;
 								foreach($resultat_rayon as $l_rayon)
 								{
-									echo'<option value="'.$l_rayon['rayon'].'"';
-									if($l_rayon['rayon']==$rayon){echo' selected="selected"';}
-									echo '>'.$l_rayon['rayon'].'</option>';
+									echo'<input type="radio" name="nom_trayon" id="trayon_'.$i.'" value="'.$l_rayon['rayon'].'"';
+									if($l_rayon['rayon']==$rayon){echo' checked="checked"';}
+									echo '/><label for="trayon_'.$i.'">'.$l_rayon['rayon'].'</label>';
+									$i++;
 								}
-								echo'</select></td>
+
+								echo'</td>
 						</tr>
 						<tr>
 							<td><label for="ajout_rayon">Ou ajouter un rayon :</label></td>
