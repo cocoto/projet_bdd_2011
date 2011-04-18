@@ -13,16 +13,6 @@
 	<?php include("php/fonctions.php"); ?>
 	<div id='corps'>
 	<h1>Liste des produits :</h1>
-	<div class='nouveau'><b><u>NOUVEAU : modification rapide de vos tarifs :</u></b><br/>
-		<a href="generateur_csv.php">--> Téléchargez votre grille tarifaire <--</a>
-		<form action="upload_prix.php" method="post" enctype="multipart/form-data">
-			<p>
-					Envoyez votre fichier complété :
-					<input type="file" name="fichier" />
-					<input type="submit" value="Envoyer le fichier" />
-			</p>
-		</form>
-	</div>
 	<?php	
 		if (connection_base())
 		{
@@ -41,8 +31,19 @@
 					{
 						echo "Problème lors des modifications";
 					}
-				}
-				echo"<table><th>Nom du produit</th><th>Catégorie</th><th>Prix</th><th>Disponibilité</th>";
+				}?>
+				<div class='nouveau'><b><span class="souligne">NOUVEAU : modification rapide de vos tarifs :</span></b><br/>
+					<a href="generateur_csv.php">&#151;&gt; Téléchargez votre grille tarifaire &lt;&#151;</a>
+					<form action="upload_prix.php" method="post" enctype="multipart/form-data">
+						<p>
+								Envoyez votre fichier complété :
+								<input type="file" name="fichier" />
+								<input type="submit" value="Envoyer le fichier" />
+						</p>
+					</form>
+				</div>
+				<?php
+				//echo"<table><th>Nom du produit</th><th>Catégorie</th><th>Prix</th><th>Disponibilité</th>";
 				$requete="SELECT Produit.id_p, type, nom_p,dispo,prix FROM Produit LEFT OUTER JOIN (SELECT id_p,prix,dispo FROM Tarif WHERE id_mag=".$_SESSION['id_mag'].") test ON Produit.id_p = test.id_p ORDER BY dispo DESC,type,nom_p";
 				$tab_resultat=execute_requete($requete);
 				foreach ($tab_resultat as $ligne)
@@ -51,10 +52,10 @@
 					{
 						$prix=0;
 					}
-					$dispo = $ligne['dispo']? "checked":"";
-					echo '<tr><form action="" method="post"><input type="hidden" name="id_p" value="'.$ligne['id_p'].'"/><td><label for="'.$ligne['id_p'].'">'.$ligne['nom_p'].'</label></td><td>'.$ligne['type'].'</td><td><input type="text" name="prix" value="'.$ligne['prix'].'" id="'.$ligne['id_p'].'"/></td><td><input type="checkbox" name="dispo" '.$dispo.'/></td><td><input type="submit" value="valider"/></tr></form>';
+					$dispo = $ligne['dispo']? 'checked="checked"':'';
+					echo '<form action="" method="post"><p class="ligne"><input type="hidden" name="id_p" value="'.$ligne['id_p'].'"/><span class="colone_g"><label for="prix_'.$ligne['id_p'].'">'.$ligne['nom_p'].'</label></span><span class="colone_p">'.$ligne['type'].'</span><span class="colone_p"><input type="text" class="form_prix" name="prix" value="'.$ligne['prix'].'" id="prix_'.$ligne['id_p'].'"/></span><span class="colone_p"><input type="checkbox" name="dispo" '.$dispo.'/></span><span class="colone_p"><input type="submit" value="valider"/></span></p><p class="ligne"></p><hr/></form>';
 				}
-				echo '</table>';
+				//echo '</table>';
 			}
 			else
 			{
