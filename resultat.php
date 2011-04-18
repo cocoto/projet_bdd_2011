@@ -66,7 +66,7 @@
 						}
 				
 						//on fait notre requête pour récupérer les produits recherchés par l'utilisateur.
-						$req='Select id_p ident,nom_p,description,prix From Produit NATURAL JOIN Tarif Where 0 '.$desc.$nom.$ref.' HAVING Prix >= ALL (SELECT prix From Tarif Where id_p=ident)';
+						$req='Select id_p ident,nom_p,description,prix From Produit NATURAL JOIN Tarif Where 0 '.$desc.$nom.$ref.' HAVING Prix <= ALL (SELECT prix From Tarif Where id_p=ident)';
 						$res=execute_requete($req);
 
 						if(empty($res)){
