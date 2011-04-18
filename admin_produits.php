@@ -53,7 +53,7 @@
 					{
 						echo '<option value="'.$type['type'].'">'.$type['type'].'</option>';
 					}
-					echo '</select></span><span class="colone"><textarea name="description" rows="5" cols="30">Description</textarea></span><span class="colone"><input type="submit" value="valider"/></span></p></form>';
+					echo '</select></span><span class="colone"><input type="text" name="description" value="Description"/></span><span class="colone"><input type="submit" value="valider"/></span></p></form>';
 				echo '<br/><br/>';
 				$requete="SELECT Produit.id_p,ref, type, nom_p,description FROM Produit ORDER BY type,nom_p";
 				$tab_resultat=execute_requete($requete);
@@ -65,7 +65,7 @@
 						$coche=$ligne['type']==$type['type']?'selected="selected"':'';
 						echo '<option value="'.$type['type'].'" '.$coche.'>'.$type['type'].'</option>';
 					}
-					echo '</select></span><span class="colone"><textarea name="description" rows="5" cols="30">'.$ligne['description'].'</textarea></span><span class="colone"><input type="checkbox" name="supp_produit"/></span><span class="colone"><input type="submit" value="valider"/></span></p></form>';
+					echo '</select></span><span class="colone"><input type="text" name="description" value="'.$ligne['description'].'"/></span><span class="colone"><input type="checkbox" name="supp_produit"/></span><span class="colone"><input type="submit" value="valider"/></span></p></form>';
 				}
 			}
 			else
