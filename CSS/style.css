@@ -13,8 +13,7 @@ a:hover{
 
 body {
 	background-attachment: fixed;
-	background-image: url('../images/fond.png');
-	background-repeat: no-repeat;
+	background-image: url('../images/fond.jpg');
 }
 #chemin{
 	text-align:left;
@@ -46,6 +45,7 @@ body {
 	margin-right:auto;
 	width:70%;
 	min-width:700px;
+	min-height:500px;
 	background-image:url('../images/transparent.PNG');
 }
 
