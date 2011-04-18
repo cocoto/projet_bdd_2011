@@ -27,10 +27,9 @@ body {
 	margin-top:10px;
 	margin-left:auto;
 	margin-right:auto;
-	width:60%;
+	width:70%;
 	min-width:700px;
 	background-image:url('../images/transparent.PNG');
-	display:table;	
 }
 
 .description{
@@ -43,7 +42,7 @@ body {
 	background-image:url('../images/transparent.PNG');
 	text-align:center;
 	font-style:italic;
-	width:60%;
+	width:70%;
 	min-width:700px;
 	margin-top:10px;
 	margin-left:auto;
@@ -51,10 +50,9 @@ body {
 }
 
 #head{
-	overflow:none;
 	border:ridge;
 	text-align:center;
-	width:60%;
+	width:70%;
 	height:auto;
 	min-width:700px;
 	margin-left:auto;
@@ -74,7 +72,7 @@ body {
 	margin-top:10px;
 	margin-left:auto;
 	margin-right:auto;
-	width:60%;
+	width:70%;
 	min-width:700px;
 	border:ridge;
 	background-image:url('../images/transparent.PNG');
@@ -87,7 +85,7 @@ body {
 	border:ridge;
 	background-image:url('../images/transparent.PNG');
 	text-align:center;
-	width:60%;
+	width:70%;
 	height:20px;
 	min-width:700px;
 	margin-top:10px;
