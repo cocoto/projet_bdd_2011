@@ -21,8 +21,8 @@
 				if($resultat=execute_requete($requete))
 				{
 					echo "<p id='chemin'><a href='resultat.php?rayon=".$resultat[0]['rayon']."'>".$resultat[0]['rayon']."</a>/<a href='resultat.php?type=".$resultat[0]['type']."'>".$resultat[0]['type']."</a>/".$resultat[0]['nom_p']."</p>";
-					echo "<p id='titreP'>".$resultat[0]['nom_p']."</p>";
-					echo "<p id='description'>".$resultat[0]['description']."</p>";
+					echo "<p class='titreP'>".$resultat[0]['nom_p']."</p>";
+					echo "<p class='description'>".$resultat[0]['description']."</p><br/></br></br></br></br>";
 					$requete='SELECT nom_ens,nom_m,ville,taille,prix,dispo FROM Tarif NATURAL JOIN Magasin JOIN Enseigne on Magasin.id_ens=Enseigne.id_ens WHERE id_p="'.$_GET['id_p'].'" ORDER BY dispo DESC, prix ASC';
 					if ($resultat=execute_requete($requete))
 					{
@@ -41,7 +41,6 @@
 				}
 				else
 				{
-					# code...
 					echo "Votre produit est introuvable dans notre base de donnée";
 				}
 			}
