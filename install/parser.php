@@ -98,6 +98,8 @@
 					{
 						$tab[1]=htmlspecialchars($tab[1],ENT_QUOTES);//On échappe les " et '
 						$tab[4]=htmlspecialchars($tab[4],ENT_QUOTES);//Dans le titre et la desciption
+						
+						//Si la reference n'est pas présente dans la ligne, on en génère une aléatoire (cf : génération mot de passe magasin)
 						if (empty($tab[0]))
 						{
 							$chaine = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
