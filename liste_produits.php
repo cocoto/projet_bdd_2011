@@ -16,8 +16,10 @@
 	<?php	
 		if (connection_base())
 		{
+			//SEUL UN magasin peut accèder à cette page
 			if (isset($_SESSION['id_mag']))
 			{
+				//Traitement de la modification d'un produit individuel
 				if(isset($_POST['id_p']))
 				{
 					$prix=htmlspecialchars($_POST['prix']);
@@ -44,8 +46,12 @@
 				</div>
 				<?php
 				//echo"<table><th>Nom du produit</th><th>Catégorie</th><th>Prix</th><th>Disponibilité</th>";
+				//On selectionne et affiche l'ensemble des produits du site, qu'ils soient ou non dans le magasin, et on affiche les tarifs et la dispo de chacun
 				$requete="SELECT Produit.id_p, type, nom_p,dispo,prix FROM Produit LEFT OUTER JOIN (SELECT id_p,prix,dispo FROM Tarif WHERE id_mag=".$_SESSION['id_mag'].") test ON Produit.id_p = test.id_p ORDER BY dispo DESC,type,nom_p";
 				$tab_resultat=execute_requete($requete);
+				/** La norme W3C interdit la présence d'un formulaire dans un tableau
+				 * Le code est basé sur un "tableau de formulaire", et ensuite a été converti en jeux de paragraphes et <span>
+				 */
 				foreach ($tab_resultat as $ligne)
 				{
 					if (!$ligne['prix'])

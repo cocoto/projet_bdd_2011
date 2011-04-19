@@ -1,9 +1,12 @@
 <?php
 	if(isset($_GET['telecharger']))
 	{
+		//Si la personne à cliqué sur télécharger, on récupère le fichié généré
 		header('Content-Disposition: attachment; filename="'.$_GET['telecharger'].'"');
+		//On amorce un téléchargement de ce fichier
 		readfile($_GET['telecharger']);
 		@unlink($_GET['telecharger']);
+		//Puis on détruit le fichier en question
 	}
 	else
 	{
@@ -25,17 +28,22 @@
 		<?php
 		//Générateur de CSV
 		connection_base();
+		//On vérifie que le magasin est bin connecté
 		if(isset($_SESSION['id_mag']))
 		{
+			//On séléctionne les produits du site qu'ils soient ou non dans le magasin, ainsi que les tarifs et dispos dans ce magasin
 			$requete="SELECT Produit.id_p,ref, type, nom_p,dispo,prix 
 				FROM Produit LEFT OUTER JOIN 
 					(SELECT id_p,prix,dispo FROM Tarif WHERE id_mag=".$_SESSION['id_mag'].") test ON Produit.id_p = test.id_p 
 				ORDER BY dispo DESC,type,nom_p";
 			if($resultat=execute_requete($requete)){
+				//Création du fichier, nom unique basé sur un timestamp
 				$nom_fichier="generator/tarif_".time().".csv";
 				if ($fichier=@fopen($nom_fichier,"w"))
 				{
+					//Ecriture des en-têtes
 					fwrite($fichier,"ne pas changer|type|nom du produit|référence|prix|disponibilité\r\n");
+					//Pour chaque résultat, on insère une nouvelle ligne formatée dans la variable $ajout
 					foreach($resultat as $ligne)
 					{
 						
@@ -55,7 +63,9 @@
 						{
 							$ajout.=$ligne['dispo']==1?'dispo':'';
 						}
-						$ajout.="| \n\r";
+						$ajout.="| \n\r"; //Caractère de fin de ligne
+						
+						//Ecriture dans le fichier de la nouvelle ligne
 						fwrite($fichier,$ajout);	
 					}
 					echo '<p>Génération du fichier terminé, vous pouvez le récupèrer <a href="?telecharger='.$nom_fichier.'">ici</a></p>';
