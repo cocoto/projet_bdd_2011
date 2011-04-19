@@ -13,6 +13,9 @@
 	<?php include("php/fonctions.php"); ?>
 	<div id='corps'>
 	<?php
+		/**
+		 * Page d'information relative à un produit -> son nom, sa description, les tarifs et magasin qui le possèdent'
+		 */
 		if(connection_base())
 		{
 			if(isset($_GET['id_p']))

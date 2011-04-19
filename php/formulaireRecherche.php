@@ -1,4 +1,5 @@
 <?php
+		//Case description cochée par defaut
 	     echo  "<form action='resultat.php' method='post'>
 			<table id='tableRecherche'>
 				<tr>

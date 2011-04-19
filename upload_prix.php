@@ -13,12 +13,19 @@
 	<?php include("php/fonctions.php"); ?>
 	<div id='corps'>
 		<?php
+		/*
+		 * Fichier de traitement de la grille tarifaire (mise à jour)
+		 * Le code est similaire à la page parser.php
+		 * Le fichier téléchagé reste dans le cache et est effacé par le serveur à la fin du script
+		 */
 		if(isset($_SESSION['id_mag']))
 		{
+			//Si le fichier est le bon
 			if(isset($_FILES['fichier']) && $_FILES['fichier']['type']=="text/csv" && $_FILES['fichier']['error']==0)
 			{
 				if(connection_base())
 				{
+					//ouverture en lecture
 					if($fichier=fopen($_FILES['fichier']['tmp_name'],"r"))
 					{
 						while($ligne = fgets($fichier))

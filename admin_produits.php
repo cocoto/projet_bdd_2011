@@ -16,12 +16,15 @@
 	<?php	
 		if (connection_base())
 		{
+			//Seuls l'administrateur et le responsable d'une enseigne peut accèder à cette page
 			if (isset($_SESSION['id_ens']) || isset($_SESSION['admin']))
 			{
+				//Traitement des modifications en cas de formulaire envoyé
 				if(isset($_POST['id_p']) && $_POST['type']!='defaut')
 				{
 					if(isset($_POST['supp_produit']) and $_POST['supp_produit']=="on")
 					{
+						//CF remarques -> admin.php
 						$requete='DELETE FROM Tarif WHERE id_p="'.$_POST['id_p'].'"';
 						if(execute_requete($requete))
 						{
@@ -46,7 +49,12 @@
 						echo "Problème lors des modifications";
 					}
 				}
+				/** La norme W3C interdit la présence d'un formulaire dans un tableau
+				 * Le code est basé sur un "tableau de formulaire", et ensuite a été converti en jeux de paragraphes et <span>
+				 */
 				$tab_types=execute_requete('SELECT type FROM Type');
+				
+				//Formulaire d'ajout d'un produit
 				echo"<br/>Ajouter un produit<br/>";
 				echo '<form action="" method="post"><p class="ligne"><input type="hidden" name="id_p" value=""/><span class="colone"><input type="text" name="ref" value="Référence"/></span><span class="colone"><input type="text" name="nom_p" value="nom du produit"/></span><span class="colone"><select name="type"><option value=\'defaut\'>Choisir un type</option>';
 					foreach($tab_types as $type)
@@ -55,6 +63,8 @@
 					}
 					echo '</select></span><span class="colone"><input type="text" name="description" value="Description"/></span><span class="colone"><input type="submit" value="valider"/></span></p></form>';
 				echo '<br/><br/>';
+				
+				//Affichage de la liste des produits sous forme de champs
 				$requete="SELECT Produit.id_p,ref, type, nom_p,description FROM Produit ORDER BY type,nom_p";
 				$tab_resultat=execute_requete($requete);
 				foreach ($tab_resultat as $ligne)

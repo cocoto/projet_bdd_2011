@@ -14,9 +14,25 @@
 	<div id='corps'>
 		
 		<?php
+			/**
+			 * Cette page est destinée à l'administration générale du site (Rayon, Types, Produits, Magasins, Enseignes)
+			 * Seul l'administrateur du site peut y accèder
+			 * La première partie du code gère les modifications envoyées par formulaire
+			 * La seconde partie traite de la création des formulaires (qui prennent de fait les modifications effectuées)
+			 * 
+			 * ATTENTON=================================================================
+			 * La suppression d'une enseigne entraine la suppression des magasins associés
+			 * La suppression d'un magasin entraine la suppression des tarifs associés
+			 * La suppression d'un rayon entraine la suppression des catégories associées
+			 * La suppression d'une catégorie entraine la suppression des produits associés
+			 * La suppression d'un produit entraine la suppression des tarifs associés 
+			 * ==========================================================================
+			 * Les mots de passes sont encryptés en sha1
+			 */
+			 
 			//@TODO Faire la gestion des différents droits
 			//@TODO Implementer Javascript pour vérifier les champs + AJAX dans les listes
-			if(isset($_SESSION['admin']))
+			if(isset($_SESSION['admin'])) //Seul l'administrateur peut accèder à la page'
 			{
 				if(connection_base())
 				{
@@ -24,13 +40,24 @@
 					if(isset($_POST['nom_ens']))
 					{
 						
-						
+						/*Traitement des données une fois le formulaire d'enseigne envoyé*/
 						if(!empty($_POST['nom_ens'])&&!empty($_POST['dirg_ens'])&&!empty($_POST['pass_ens']))
 						{
+							//Si la suppression est demandée
 							if(isset($_POST['supp_ens'])&&$_POST['supp_ens']=="on")
 							{
-								$requete='DELETE Enseigne, Magasin FROM Enseigne, Magasin WHERE Magasin.id_ens="'.$_POST['id_ens'].'" and Enseigne.id_ens="'.$_POST['id_ens'].'"';
+								$requete='DELETE FROM Tarif WHERE id_mag in (SELECT id_mag FROM Magasin WHERE id_ens="'.$_POST['id_ens'].'")';
+								//On supprime les tarifs des magasins liés à l'enseigne
+								if(execute_requete($requete))
+								{
+									$requete='DELETE FROM Enseigne, Magasin USING Enseigne LEFT OUTER JOIN Magasin on Magasin.id_ens=Enseigne.id_ens WHERE Enseigne.id_ens="'.$_POST['id_ens'].'"';
+								}
+								else
+								{
+									echo "problème lors de la suppression, veuillez contacter un administrateur";
+								}
 							}
+							//Si c'est un ajout/modification
 							else
 							{
 								$nom=htmlspecialchars($_POST['nom_ens']);
@@ -55,11 +82,13 @@
 					}
 					if(isset($_POST['nom_mag']))
 					{
+						/*Traitement des données une fois le formulaire de magasin envoyé*/
 						if(!empty($_POST['nom_mag'])&&!empty($_POST['dirg_mag'])&&!empty($_POST['ville_mag'])&&!empty($_POST['pass_mag'])&&!empty($_POST['ens_mag'])&&!empty($_POST['taille_mag']))
 						{
 							if(isset($_POST['supp_mag'])&&$_POST['supp_mag']=="on")
 							{
-								$requete='DELETE FROM Magasin WHERE id_mag="'.$_POST['id_mag'].'"';
+								//On supprime le magasin et l'ensemble des tarifs associés
+								$requete='DELETE FROM Magasin, Tarif USING Magasin LEFT OUTER JOIN Tarif on Tarif.id_mag=Magasin.id_mag WHERE Magasin.id_mag="'.$_POST['id_mag'].'"';
 							}
 							else
 							{
@@ -68,7 +97,7 @@
 								$ville=htmlspecialchars($_POST['ville_mag']);
 								$ens=$_POST['ens_mag'];
 								$taille=$_POST['taille_mag'];
-								$mdp=sha1(htmlspecialchars($_POST['pass_mag']));
+								$mdp=sha1(htmlspecialchars($_POST['pass_mag'])); //Encodage du mot de passe
 								$requete='REPLACE INTO Magasin(id_mag,nom_m,nom_resp,taille,ville,id_ens,mdp) valueS("'.$_POST['id_mag'].'","'.$nom.'","'.$dirg_ens.'","'.$taille.'","'.$ville.'","'.$ens.'","'.$mdp.'")';	
 							}
 							if(execute_requete($requete))
@@ -85,17 +114,22 @@
 							echo "Vous n'avez pas remplis tous les champs";
 						}
 					}
+					
 					if(isset($_POST['nom_rayon']) && !empty($_POST['nom_rayon']))
 					{
+						/*Traitement des données une fois le formulaire de rayon envoyé*/
 						if(isset($_POST['supp_rayon']) && $_POST['supp_rayon']=="on")
 							{
+								//On supprime les tarifs liés aux produits dont les catégories sont concernées par le rayon
 								$requete='DELETE FROM Tarif
 								WHERE Tarif.id_p in (SELECT id_p FROM Produit WHERE type in (SELECT type FROM Type WHERE rayon="'.$_POST['nom_rayon'].'"))';
 								if(execute_requete($requete))
 								{
+									//Puis on supprime les produits en question
 									$requete='DELETE FROM Produit WHERE type in (SELECT type FROM Type WHERE rayon="'.$_POST['nom_rayon'].'")';
 									if (execute_requete($requete))
 									{
+										//Avant de supprimer tous les types liés à ce rayon (et le rayon indirectement)
 										$requete='DELETE FROM Type Where Rayon="'.$_POST['nom_rayon'].'"';
 									}
 									else
@@ -127,15 +161,18 @@
 					}
 					if(isset($_POST['nom_type']))
 					{
+						/*Traitement des données une fois le formulaire de type envoyé*/
 						if(!empty($_POST['nom_type']) && isset($_POST['nom_trayon']) && !empty($_POST['nom_trayon']))
 						{
 							if(isset($_POST['supp_type']) && $_POST['supp_type']=="on")
 							{
+								//On supprime les tarifs du type à supprimer et le type donné
 								$requete='DELETE Tarif,Type FROM Tarif,Produit,Type
 								WHERE Type.type="'.$_POST['nom_type_ans'].'" AND Tarif.id_p in
 								(SELECT id_p FROM Produit WHERE type="'.$_POST['nom_type_ans'].'")';
 								if(execute_requete($requete))
 								{
+									//On retire les produits liés au type
 									$requete='DELETE FROM Produit WHERE type="'.$_POST['nom_type_ans'].'"';
 								}
 								else
@@ -178,7 +215,10 @@
 						}
 					}
 		
+		/*Menu traditionnel d'édition des différentes catégories'*/
 		
+		
+		//PARTIE ENSEIGNE
 		echo'<h2 id="edit_enseigne">Modifier / Ajouter une enseigne</h2>';
 					$requete='SELECT id_ens,nom_ens FROM Enseigne';
 					if($resultat_ens=execute_requete($requete))
@@ -227,7 +267,9 @@
 							<td><input type="submit" value="'.$valid.'"/></td>
 						</tr></table></form>';
 				
-				
+		
+		
+		//PARTIE MAGASIN		
 		echo'<h2 id="edit_magasin">Modifier / Ajouter un magasin</h2>';
 					
 					$requete='SELECT id_mag,nom_m,nom_ens FROM Magasin JOIN Enseigne on Enseigne.id_ens=Magasin.id_ens';
@@ -314,6 +356,10 @@
 							<td></td>
 							<td><input type="submit" value="'.$valid.'"/></td>
 						</tr></table></form>';
+						
+						
+						
+		//PARTIE RAYON
 		echo'<h2 id="modif_rayon">Modifier / Ajouter un rayon</h2>';
 					$requete='SELECT DISTINCT rayon FROM Type';
 					if($resultat_rayon=execute_requete($requete))
@@ -325,7 +371,7 @@
 						}
 						echo '</select></p></form>';
 					}
-					if(isset($_POST['nom_rayon_ans']))
+					if(isset($_POST['nom_rayon_ans']) && !empty($_POST['nom_rayon_ans']))
 					{
 						$requete='SELECT rayon FROM Type WHERE rayon="'.$_POST['nom_rayon_ans'].'"';
 						if($resultat=execute_requete($requete))
@@ -349,7 +395,8 @@
 						</tr></table></form>';
 					}
 					
-				
+		
+		//PARTIE TYPE DE PRODUIT	
 		echo'<h2 id="modif_type">Modifier / Ajouter un type de produit</h2>';
 					
 					$requete='SELECT type,rayon FROM Type';

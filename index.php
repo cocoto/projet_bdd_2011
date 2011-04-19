@@ -28,6 +28,7 @@
 		<table id='list'>
 		
 				<?php
+					/* Selection et affichage de tous les rayons */
 					connection_base();
 					$req='Select distinct(rayon),type from Type group by rayon order by rayon,type asc';
 					$res=execute_requete($req);
@@ -39,6 +40,7 @@
 					echo "</tr>";
 					echo "<tr id='trlist'>";
 						for($i=0;$i<count($res);$i++){
+							//Pour chaque rayon on séléctionne et affiche les types associés
 							$req2='Select type From Type Where rayon="'.$res[$i][0].'"';
 							$res2=execute_requete($req2);
 							echo "<td class='tdlist'>";
