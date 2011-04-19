@@ -51,18 +51,26 @@
 						$recherche=htmlspecialchars($_POST['recherche']);
 						echo "<p>Vous recherchez : ".$_POST["recherche"]."</p><hr/>";
 
+						//initialisation des variables en vu de la requête finale
+						//en fonction de la méthode de recherche de l'utilisateur.
 						$desc='';
 						$nom='';
 						$ref='';
 
+						//REGEXP [[:<:]] $recherche [[:>:]] permet de trouver le mot
+						//cherché dans l'attribut spécifié.
+	
+						//si l'utilisateur a coché la case description :
 						if(isset($_POST["description"])){
 							$desc= 'or description REGEXP "[[:<:]]'.$recherche.'[[:>:]]"';
 						}
 
+						//si l'utilisateur a coché la case nom :
 						if(isset($_POST["nom"])){
 							$nom= 'or nom_p REGEXP "[[:<:]]'.$recherche.'[[:>:]]"';
 						}
 	
+						//si l'utilisateur a coché la case reference :
 						if(isset($_POST["reference"])){
 							$ref= 'or ref REGEXP "[[:<:]]'.$recherche.'[[:>:]]"';
 						}
