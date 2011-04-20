@@ -2,16 +2,17 @@
 /*	FICHIER DE FONCTIONS PHP MYSQL DU SITE : A ne pas diffuser	*/
 /*Pas de mysql_free_result car obsolète (source:doc php), mais executable manuèlement */
 $bdd="";//identifiant de la base de donnée. Variable globale invisible dans les scripts
-$host='127.0.0.1';
+$hostname='';
 $login='root';
 $mdp='';
+$base='Comparateur';
 
 /*====Fonction de connection et sélection de base===*/
 /*Retourne un booleen de bon fonctionnement, et  un message descriptif de l'erreur*/
 /*Attention messages d'erreur visibles pas les utilisateurs, restez clean*/
 function connection_base()
 {
-	global $bdd,$hostname,$login,$mdp;//on appel la variable globale
+	global $bdd,$hostname,$login,$mdp,$base;//on appel la variable globale
 	$bdd=mysql_connect($hostname,$login,$mdp);//Voir fonction mysql_connect pour changement de serveur
 	if (!$bdd)
 	{
@@ -20,7 +21,7 @@ function connection_base()
 	}
 	else
 	{
-		if (mysql_select_db("Comparateur")) //Voir fonction mysql_select_db pour changement de serveur
+		if (mysql_select_db($base)) //Voir fonction mysql_select_db pour changement de serveur
 		{
 			return true;
 		}
