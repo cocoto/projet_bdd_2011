@@ -34,7 +34,7 @@
 							if(!empty($tab[4]) && is_numeric($tab[0]))
 							{
 								$dispo=($tab[5]=="dispo")?"1":"0";
-								$requete='INSERT IGNORE INTO Tarif(id_p,id_mag,prix,dispo) VALUES("'.$tab[0].'","'.$_SESSION['id_mag'].'","'.$tab['4'].'","'.$dispo.'")';
+								$requete='REPLACE INTO Tarif(id_p,id_mag,prix,dispo) VALUES("'.$tab[0].'","'.$_SESSION['id_mag'].'","'.$tab['4'].'","'.$dispo.'")';
 								execute_requete($requete);
 							}
 						}
